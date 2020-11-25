@@ -370,11 +370,22 @@
             <h3>UI state</h3>
             <p>typically used with forms.</p>
             <p>This example uses <code>enabled</code>, <code>disabled</code>, <code>checked</code>, <code>focus</code> and <code>focus-within</code>. Note that <code>focus-within</code> is a rare example in CSS of being able to style an ancestor depending on the state of a descendant.</p>
-            <form method="GET" action="#" class="root-of-ui-pseudo-classes-search focus-within">
-                <div><label for="isEnabled"><code>:enabled</code></label><input type="text" id="isEnabled" name="isEnabled"></div>
-                <div><label for="isDisabled"><code>:disabled</code></label><input type="text" id="isDisabled" name="isDisabled" disabled="disabled"></div>
-                <div><label for="focus"><code>:focus</code></label><input type="text" id="focus" name="focus"></div>
-                <div><label for="isChecked"><code>:checked</code></label><input type="checkbox" id="isChecked" name="isChecked" checked="checked"></div>
+            <form method="GET" action="#" class="root-of-ui-pseudo-classes-search root-of-ui-pseudo-classes-search--form1 focus-within">
+                <div><label for="form1_isEnabled"><code>:enabled</code></label><input type="text" id="form1_isEnabled" name="form1_isEnabled"></div>
+                <div><label for="form1_isDisabled"><code>:disabled</code></label><input type="text" id="form1_isDisabled" name="form1_isDisabled" disabled="disabled"></div>
+                <div><label for="form1_focus"><code>:focus</code></label><input type="text" id="form1_focus" name="form1_focus"></div>
+                <div><label for="form1_isChecked"><code>:checked</code></label><input type="checkbox" id="form1_isChecked" name="form1_isChecked" checked="checked"></div>
+                <button type="submit">A submit button</button>
+                <button type="reset">A reset button</button>
+            </form>
+            <p>This next form is identical to the one above, except that it uses <code>focus-visible</code> rather than <code>focus</code>. This allows the user agent to use heuristics to determine whether to show the <code>focus-visible</code> rules or not. One example is navigation mode: both tabbing through and clicking on text inputs and buttons will result in any <code>focus</code> styles being used. If you specify <code>focus-visible</code> styles instead, they will be still be displayed when tabbing through both input text fields and buttons, but won't be displayed on buttons when you click on them. This is a good thing as clicking on a button and seeing a big outline appear on it can be ugly. Check browser support.</p>
+            <form method="GET" action="#" class="root-of-ui-pseudo-classes-search root-of-ui-pseudo-classes-search--form2 focus-within">
+                <div><label for="form2_isEnabled"><code>:enabled</code></label><input type="text" id="form2_isEnabled" name="form2_isEnabled"></div>
+                <div><label for="form2_isDisabled"><code>:disabled</code></label><input type="text" id="form2_isDisabled" name="form2_isDisabled" disabled="disabled"></div>
+                <div><label for="form2_focus"><code>:focus</code></label><input type="text" id="form2_focus" name="form2_focus"></div>
+                <div><label for="form2_isChecked"><code>:checked</code></label><input type="checkbox" id="form2_isChecked" name="form2_isChecked" checked="checked"></div>
+                <button type="submit">A submit button</button>
+                <button type="reset">A reset button</button>
             </form>
             <p>There is also the <code>:indeterminate</code>, pseudo class that can only be added programatically.</p>
         </article>

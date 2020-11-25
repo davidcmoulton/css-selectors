@@ -202,16 +202,20 @@ article > .chld-blue {
     border: 2px green solid;
 }
 
-.root-of-ui-pseudo-classes-search :focus {
-    outline: 5px rebeccapurple solid;
-}
-
 .root-of-ui-pseudo-classes-search :disabled {
     border: 2px red solid;
 }
 
 .root-of-ui-pseudo-classes-search :checked {
     margin-left: 50px;
+}
+
+.root-of-ui-pseudo-classes-search--form1 :focus {
+    outline: 5px rebeccapurple solid;
+}
+
+.root-of-ui-pseudo-classes-search--form2 :focus-visible {
+    outline: 5px rebeccapurple solid;
 }
 
 /* target pseudo class */

@@ -369,7 +369,7 @@
         <article>
             <h3>UI state</h3>
             <p>typically used with forms.</p>
-            <p>This example uses <code>enabled</code>, <code>disabled</code>, <code>checked</code>, <code>focus</code> and <code>focus-within</code>. Note that <code>focus-within</code> is a rare example in CSS of being able to style an ancestor depending on the state of a descendant.</p>
+            <p>This example uses <code>enabled</code>, <code>disabled</code>, <code>checked</code>, <code>focus</code> and <code>focus-within</code>. Note that <code>focus-within</code> is a rare example in CSS of being able to style an ancestor depending on the state of a descendant. [Well, okay, in theory there's <code>has()</code>, but no browser supports that in November 2020.]</p>
             <form method="GET" action="#" class="root-of-ui-pseudo-classes-search root-of-ui-pseudo-classes-search--form1 focus-within">
                 <div><label for="form1_isEnabled"><code>:enabled</code></label><input type="text" id="form1_isEnabled" name="form1_isEnabled"></div>
                 <div><label for="form1_isDisabled"><code>:disabled</code></label><input type="text" id="form1_isDisabled" name="form1_isDisabled" disabled="disabled"></div>

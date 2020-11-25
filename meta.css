@@ -15,3 +15,7 @@ footer.meta,
 footer.meta a {
     font-size: 0.8rem;
 }
+
+code {
+    font-family: monospace;
+}

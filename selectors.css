@@ -198,6 +198,10 @@ article > .chld-blue {
     border: 2px green solid;
 }
 
+.root-of-ui-pseudo-classes-search :focus {
+    outline: 5px rebeccapurple solid;
+}
+
 .root-of-ui-pseudo-classes-search :disabled {
     border: 2px red solid;
 }

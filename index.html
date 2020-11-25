@@ -358,9 +358,12 @@
     <section>
         <h2>Pseudo classes: dynamic</h2>
         <article>
-            <h3>the anchor element's - :link, :visited, :hover, :active</h3>
+            <h3>the anchor element's - :link, :visited, :hover, :active, :any-link</h3>
             <p>matches a elements in a particular dynamic state.</p>
-            <p class="root-of-link-pseudo-classes-search"><a href="/one/">one</a>, <a href="selectors.css">two</a>, <a href="/three/">three</a>, <a href="/four/">four</a>.</p>
+            <div class="root-of-link-pseudo-classes-search">
+                <div><a href="#" class="link-back-individual">link back: individual pseudo classes</a></div>
+                <div><a href="#" class="link-back-any">link back: <code>any-link</code></a> matches all elements that match <code>:link</code> or <code>:visited</code>. (Check browser support.)</div>
+            </div>
         </article>
 
         <article>

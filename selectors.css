@@ -172,23 +172,28 @@ article > .chld-blue {
 
 
 /* dynamic pseudo classes on a element */
-.root-of-link-pseudo-classes-search a:link {
+.root-of-link-pseudo-classes-search .link-back-individual a:link {
     color: green;
 }
 
-.root-of-link-pseudo-classes-search a:visited {
+.root-of-link-pseudo-classes-search a.link-back-individual:visited {
     color: red;
 }
 
-.root-of-link-pseudo-classes-search a:hover {
+.root-of-link-pseudo-classes-search a.link-back-individual:hover {
     color: blue;
 }
 
-.root-of-link-pseudo-classes-search a:active {
+.root-of-link-pseudo-classes-search a.link-back-individual:active {
     font-weight: bold;
 }
 
-/* dynamic UI pseudo classes */
+.root-of-link-pseudo-classes-search a.link-back-any {
+    font-style: italic;
+    color: cadetblue;
+}
+
+    /* dynamic UI pseudo classes */
 .root-of-ui-pseudo-classes-search :enabled {
     border: 2px green solid;
 }

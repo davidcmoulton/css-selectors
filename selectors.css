@@ -164,6 +164,11 @@ article > .chld-blue {
     font-weight: bold;
 }
 
+/* is */
+.root-of-is-search > :is(span, q) {
+    color: blue;
+}
+
 
 
 /* dynamic pseudo classes on a element */

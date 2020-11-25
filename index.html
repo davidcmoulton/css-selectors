@@ -337,6 +337,22 @@
             <p>As nth-of-type, but only elements of the element type to match are included in the evaluation of the child count.</p>
         </article>
 
+        <article>
+            <h3>is</h3>
+            <p><code>is</code> (<code>matches</code> that was), takes a list of elements, any one of which will cause a match. Here, elements selected with <code>:is(span, q)</code> are coloured blue:</p>
+            <div class="root-of-is-search">
+                <span>I'm a <code>span</code></span> whereas <q>I'm a <code>q</code></q> and <i>I'm an <code>i</code></i>.
+            </div>
+            <p>Note that unlike the usual parsing rules of CSS, the selector list within <code>is</code> is forgiving: if a selector within <code>is</code> is not recognised by the browser, rather than invalidating the entire selector containing <code>is</code>, only the individual invalid selector within <code>is</code> is ignored.</p>
+            <p>Check browser support.</p>
+        </article>
+
+        <article>
+            <h3>where</h3>
+            <p><code>where</code> always has a specificity of 0, but otherwise is identical to <code>is</code>. <code>is</code> takes the specificity of the most specific selector in its arguments.
+        </article>
+
+
     </section>
 
     <section>

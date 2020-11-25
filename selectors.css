@@ -193,7 +193,11 @@ article > .chld-blue {
     color: cadetblue;
 }
 
-    /* dynamic UI pseudo classes */
+/* dynamic UI pseudo classes */
+.root-of-ui-pseudo-classes-search.focus-within:focus-within {
+    background-color: rgba(0, 255, 255, 0.5);
+}
+
 .root-of-ui-pseudo-classes-search :enabled {
     border: 2px green solid;
 }

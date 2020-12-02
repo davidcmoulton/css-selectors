@@ -64,7 +64,7 @@ dt {
 }
 
 /* attribute - starts-with match */
-[href^="http"]::after {
+.external-link-search [href^="http"]::after {
     content: ' [I can\'t believe you\'re leaving me!]';
     font-size: 0.85rem;
 }
@@ -82,22 +82,22 @@ dt {
 
 /** Grouping **/
 /* descendant */
-.some-ul .some-span {
+.descendant-selector-search ul span {
     font-style: italic;
 }
 
 /* child */
-article > .chld-blue {
+.child-selector-search > p {
     color: blue;
 }
 
 /* adjacent sibling */
-.adj-sibling-target + li {
-    color: silver;
+.adjacent-sibling-search .specified-immediately-preceding-sibling + li {
+    font-weight: bold;
 }
 
 /* following siblings */
-.gen-sibling-target ~ li {
+.following-sibling-search .specified-preceding-sibling ~ li {
     font-weight: bold;
 }
 

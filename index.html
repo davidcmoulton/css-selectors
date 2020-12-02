@@ -10,7 +10,6 @@
 <body>
     <header role="banner">
         <h1>Illustrative use of CSS selectors</h1>
-        <p>Dig into the code to find out how each one works.</p>
     </header>
 
     <section>
@@ -95,7 +94,7 @@
         <article>
             <h3>attribute selector: starts with string</h3>
             <p>Match fully qualified links with <code>[href^="http"]</code></p>
-            <ul>
+            <ul class="external-link-search">
                 <li>An <a href="http://external-link">external link</a> has an indicator</li>
                 <li>A <a href="#">page fragment link to the current page</a> doesn't</li>
             </ul>
@@ -122,9 +121,9 @@
             <h3>attribute selector: beginning of a hyphen-separated value list</h3>
             <p>Used mainly for the use case: matching of elements with any <code>en</code> value of <code>hreflang</code>.</p>
             <ul>
-                <li><a href="#" hreflang="en-uk">Good morning from the UK!</a></li>
-                <li><a href="#" hreflang="en-au">G'day from Oz!</a></li>
-                <li><a href="#" hreflang="en-us">Howdy from the States!</a></li>
+                <li><a href="#" hreflang="en-UK">Good morning from the UK!</a></li>
+                <li><a href="#" hreflang="en-AU">G'day from Oz!</a></li>
+                <li><a href="#" hreflang="en-US">Howdy from the States!</a></li>
                 <li><a href="#" hreflang="en">Hello from an unspecified English region</a></li>
                 <li><a href="#" hreflang="fr">Bonjour de France!</a></li>
             </ul>
@@ -135,56 +134,50 @@
     <section>
         <h2>Structural</h2>
         <article>
-            <h3>descendant selector</h3>
-            Put the <code>span</code> that lives anywhere within a <code>ul</code>
-            into italics.
-            <ul class="some-ul">
-                <li>I am plain, but... <span class="some-span">I am italic! Yay!</span></li>
-            </ul>
-        </article>
-
-        <article>
-            <h3>child selector</h3>
-            <p>make the child <code>div</code> blue, but not a more remote descendant</p>
-            <div class="chld-blue">
-                I am an immediate child.
-            </div>
-            <div class="chld-blue">
-                I am another immediate child.
-            </div>
-            <div>
-                <div class="chld-blue">I am a more remote descendant.</div>
+            <h3>Descendant selector</h3>
+            <p>Match any <code>&lt;span&gt;</code> living anywhere inside a <code>&lt;ul&gt;</code>, with <code>ul span</code>.</p>
+            <div class="descendant-selector-search">
+                <ul>
+                    <li>I am not a span and so am not italic</li>
+                    <li><span>I am an italic span as I'm inside a <code>ul</code>.</span></li>
+                </ul>
+                <span>I'm a span outside any <code>ul</code>, so am not italic.</span>
             </div>
         </article>
 
         <article>
-            <h3>adjacent sibling selector</h3>
-            <p>makes silver the subsequent sibling after the target.</p>
-            <ol>
-                <li>non-sibling non-target</li>
-            </ol>
-            <ul>
-                <li>sibling non-target</li>
-                <li class="adj-sibling-target">target of the sibling selector</li>
-                <li>sibling non-target</li>
-                <li>sibling non-target</li>
-            </ul>
-            <p>non-sibling non-target.</p>
+            <h3>Child selector</h3>
+            <p>Match any child <code>&lt;p&gt;</code> of <code>.parent</code>, but none nested more deeply, by using <code>.parent > p</code>.</p>
+            <div class="child-selector-search">
+                <p>I am an immediate child.</p>
+                <p>I am another immediate child.
+                </p>
+                <div>
+                    <p>I am a more remote descendant.</p>
+                </div>
+            </div>
         </article>
 
         <article>
-            <h3>following siblings selector</h3>
-            <p>makes bold all matched siblings subsequent to the target.</p>
-            <ol>
-                <li>non-sibling non-target</li>
-            </ol>
-            <ul>
-                <li>sibling non-target</li>
-                <li class="gen-sibling-target">target of the sibling selector</li>
-                <li>sibling non-target</li>
-                <li>sibling non-target</li>
+            <h3>Adjacent sibling selector</h3>
+            <p>Match a target element that immediately follows a specified sibling with <code>immediately-preceding-sibling-selector + target</code></p>
+            <ul class="adjacent-sibling-search">
+                <li>earlier sibling</li>
+                <li class="specified-immediately-preceding-sibling">specified immediately preceding sibling</li>
+                <li>the target</li>
+                <li>later sibling</li>
             </ul>
-            <p>non-sibling non-target.</p>
+        </article>
+
+        <article>
+            <h3>Following siblings selector</h3>
+            <p>Match one or more targets that follow a specified sibling with <code>preceding-sibling-selector ~ target</code>.</p>
+            <ul class="following-sibling-search">
+                <li>earlier sibling</li>
+                <li class="specified-preceding-sibling">specified preceding sibling</li>
+                <li>a target</li>
+                <li>another target</li>
+            </ul>
         </article>
     </section>
 

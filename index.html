@@ -16,32 +16,33 @@
     <section>
         <h2>Basic</h2>
         <article>
-            <h3>universal selector</h3>
-            <p>elements matching "*" (all), have font set here.</p>
+            <h3>Universal selector</h3>
+            <p>Match all non-pseudo-elements with <code>*</code>. Pseudo-elements need their own selectors, e.g. <code>*::after</code> will match all <code>after</code> pseudo-elements.</p>
         </article>
 
         <article>
             <h3>element selector</h3>
-            <p>force <code>dt</code> elements uppercase</p>
+            <p>force <code>dt</code> elements uppercase with <code>dt { text-transform: uppercase; }</code></p>
             <dl>
-                <dt>Marvin</dt>
-                <dd>The best paranoia out of this world. Probably.</dd>
+                <dt>Some term</dt>
+                <dd>An amazingly spot on definition of "some term".</dd>
             </dl>
         </article>
 
         <article>
             <h3>class selector</h3>
-            <p>Colour elements red with <code class="cls-red">.cls-red</code> </p>
+            <p>Make elements <span class="cls-bigger">bigger</span> with <code>.cls-bigger {  font-size: 1.5em; }</code> </p>
         </article>
 
         <article>
             <h3>multiple class selector</h3>
-            <p>Colour elements green, and make them bigger, with <code class="cls-green cls-big">.cls-green.cls-big</code> </p>
+            <p><span class="cls-bigger cls-blue">Italicise</span> elements that are both
+                <span class="cls-bigger">bigger</span> and <span class="cls-blue">blue</span> with <code>.cls-bigger.cls-blue { font-style: italic; }</code> </p>
         </article>
 
         <article>
             <h3>id selector</h3>
-            <p>Make <span id="me">#me</span> bold!</p>
+            <p>Make <span id="me">#me</span> bold with <code>#me { font-weight: bold; }</code></p>
         </article>
     </section>
 

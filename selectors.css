@@ -12,14 +12,16 @@ dt {
 }
 
 /* class */
-.cls-red {
-    color: red;
+.cls-bigger {
+    font-size: 1.5em;
 }
 
 /* multiple class */
-.cls-green.cls-big {
-    color: green;
-    font-size: 2em;
+.cls-blue {
+    color: blue;
+}
+.cls-bigger.cls-blue {
+    font-style: italic;
 }
 
 /* id */

@@ -19,7 +19,7 @@ footer.meta a {
 code {
     padding: 0.2em 0.4em;
     margin: 0;
-    font-size: 85%;
+    /*font-size: 85%;*/
     background-color: #1b1f230d;
     border-radius: 6px;
     font-family: monospace;

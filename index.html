@@ -132,7 +132,7 @@
     </section>
 
     <section>
-        <h2>Structural</h2>
+        <h2>Structural complex selectors</h2>
         <article>
             <h3>Descendant selector</h3>
             <p>Match any <code>&lt;span&gt;</code> living anywhere inside a <code>&lt;ul&gt;</code>, with <code>ul span</code>.</p>
@@ -153,7 +153,7 @@
                 <p>I am another immediate child.
                 </p>
                 <div>
-                    <p>I am a more remote descendant.</p>
+                    <p>I am a more deeply nested descendant.</p>
                 </div>
             </div>
         </article>
@@ -179,19 +179,25 @@
                 <li>another target</li>
             </ul>
         </article>
+
+        <article>
+            <h3>Table / grid column selector</h3>
+            <p>Match a target within the specified column of a table or grid. No implementations yet in 2020, <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Column_combinator">more details on MDN</a>.</p>
+        </article>
+
     </section>
 
     <section>
-        <h3>Pseudo classes: structural</h3>
+        <h2>Structural pseudo-classes</h2>
         <article>
-            <h3>root</h3>
-            <p>:root selects root element. Can also use html in html docs, but :root necessary for other doc types e.g. XML, SVG etc.</p>
+            <h3>:root</h3>
+            <p><code>:root</code> matches the root element. Can also use <code>&lt;html&gt;</code> in html docs, but <code>:root</code> is necessary for other doc types e.g. XML, SVG etc.</p>
         </article>
 
         <article>
-            <h3>empty</h3>
-            <p>:empty selects empty elements. N.B. elements, whitespace and text nodes prevent an element from being :empty. The presence of comment nodes does not prevent their parent element from being :empty.</p>
-            <p>The middle list item is empty, and has content-after applied by its matched rule</p>
+            <h3>:empty</h3>
+            <p><code>:empty</code> matches empty elements. N.B. element nodes and text nodes (including whitepsace) prevent a containing element from being empty. Comment nodes do not prevent their parent element from being empty.</p>
+            <p>Here, empty list items have a background pattern applied.</p>
             <ul class="root-of-empty-search">
                 <li>First element</li>
                 <li></li>
@@ -199,26 +205,47 @@
             </ul>
         </article>
 
+        <article>
+            <h3>:is</h3>
+            <p><code>:is</code> (<code>matches</code> that was), takes a list of elements, any one of which will cause a match. Here, elements selected with <code>:is(span, q)</code> are coloured blue:</p>
+            <div class="root-of-is-search">
+                <span>I'm a <code>span</code></span> whereas <q>I'm a <code>q</code></q> and <i>I'm an <code>i</code></i>.
+            </div>
+            <p>Note that unlike the usual parsing rules of CSS, the selector list within <code>is</code> is forgiving: if a selector within <code>is</code> is not recognised by the browser, rather than invalidating the entire selector containing <code>is</code>, only the individual invalid selector within <code>is</code> is ignored.</p>
+            <p><code>is</code> takes the specificity of the most specific selector in its arguments.</p>
+            <p>Check browser support.</p>
+        </article>
+
+        <article>
+            <h3>:where</h3>
+            <p><code>:where</code> always has a specificity of 0, but otherwise is identical to <code>:is</code>.
+        </article>
+
+        <h3>Child-indexed pseudo-classes</h3>
+        <p>Selectors level 3 describes matching based on the child's index relative to its parent, as encapsulated in the name of some of the pseudo-classes. Selectors level 4 allows for a non-element parent, or no parent at all, by describing an element's relative index with respect to its siblings. Language in this section refers to "child" to match the pseudo class names, but if you're in a level 4 implementation, the implied parent is not a requirement.</p>
+
+        <p>Note that <em>indices are always 1-indexed</em>.</p>
+
         <article class="root-of-only-child-search">
-            <h3>unique children</h3>
-            <p>:only-child matches if the designated element is the only child of its parent (only evaluates element node type, ignores text). In the example below, the match to :only-child will be in small caps.</p>
-            <p>In this paragraph, <span>this element</span> is the only child.</p>
-            <p>In this paragraph, both <span>this</span>, and <span>this element</span>, are child elements of the same type.</p>
+            <h3>:only-child</h3>
+            <p><code>:only-child</code> matches if an element is the only child element of its parent.</p>
+            <p>In this paragraph, <span>I am the only child element, so I match, (it doesn't matter what type of element I am).</span></p>
+            <p>In this paragraph, there is more than one child, both <i>here</i> and <i>here</i>, so the <code>:only-child</code> selector doesn't find a match.</p>
             <p>CSS Selector level 4 allows the selector to match an element without a parent. Check browser support if you need this feature.</p>
         </article>
 
-        <article class="root-of-only-child-of-type-search">
-            <h3>unique children of same type</h3>
-            <p>:only-child-of-type matches if the designated element is the only child of that type of its parent (only evaluates element node type, ignores text). In the example below, the match to :only-child-of-type will be in small caps.</p>
-            <p>In this paragraph, <span>this element</span> is the only child.</p>
-            <p>In this paragraph, both <span>this</span>, and <span>this element</span>, are child elements of the same type.</p>
-            <p>In this paragraph, <span>this</span>, and <label>this element</label>, are child elements of different types.</p>
+        <article class="root-of-only-of-type-search">
+            <h3>:only-of-type</h3>
+            <p><code>:only-of-type</code> matches an element of specified type that is the only child element of that type of its parent. Here we're using <code>span:only-of-type</code> to target <code>&lt;span&gt;</code> elements that are the only span element of their parents:</p>
+            <p>In this paragraph, <span>this <code>&lt;span&gt;</code></span>, and <label>this <code>&lt;label&gt;</code>element</label>, are the only child elements their respective types, so the <code>span:only-child-of-type</code> selector matches the span but not the label.</p>
+            <p>In this paragraph, both <span>this <code>&lt;span&gt;</code></span>, and <span>this <code>&lt;span&gt;</code></span>, are child elements of the same parent, so the selector doesn't match.</p>
+
             <p>CSS Selector level 4 allows the selector to match an element without a parent. Check browser support if you need this feature.</p>
         </article>
 
         <article>
-            <h3>first child</h3>
-            <p>matches the element where it appears as the first child of a parent.</p>
+            <h3>:first-child</h3>
+            <p><code>:first-child</code> matches an element that is the first child of its parent.</p>
             <ul class="root-of-first-child-search">
                 <li>first child</li>
                 <li>second child</li>
@@ -227,32 +254,63 @@
         </article>
 
         <article>
-            <h3>first child of type</h3>
-            <p>matches the element where it appears as the first child of its element type of a parent. (May well not be the first element, though).</p>
-            <p class="root-of-first-child-of-type-search">Here is a <label>label</label>, and here is a <span>span</span>. Oh, and another <span>span</span>.</p>
+            <h3>:first-of-type</h3>
+            <p><code>:first-of-type</code> matches an element that is the first child element of its type, (it needn't be the first overall element child). Here we're using <code>span:first-of-type</code> to select the first <code>&lt;span&gt;</code> element.</p>
+            <p class="root-of-first-of-type-search">This paragraph contains a <label><code>&lt;label&gt;</code></label>, this first <span><code>&lt;span&gt;</code> which matches</span>, and this second <span><code>&lt;span&gt;</code></span>, which doesn't.</p>
         </article>
 
         <article>
-            <h3>last child</h3>
-            <p>matches the element where it appears as the last child of a parent.</p>
+            <h3>:last-child</h3>
+            <p><code>:last-child</code> is the converse of <code>:first-child</code>.</p>
             <ul class="root-of-last-child-search">
                 <li>first child</li>
                 <li>second child</li>
-                <li>third child</li>
+                <li>last child</li>
             </ul>
         </article>
 
         <article>
-            <h3>last child of type</h3>
-            <p>matches the element where it appears as the last child of its element type of a parent. (May well not be the last element, though).</p>
-            <p class="root-of-last-child-of-type-search">Here is a <span>span</span>, and another <span>span</span>. And here is a <label>label</label>.</p>
+            <h3>:last-of-type</h3>
+            <p><code>:last-of-type</code> is the converse of <code>:first-of-type</code>.</p>
+            <p class="root-of-last-of-type-search">Here is a <span>span</span>, and another <span>span</span>. And here is a <label>label</label>.</p>
         </article>
 
         <article>
-            <h3>nth-child</h3>
+            <h4>:nth-child(even)</h4>
+            <p><code>:nth-child(even)</code>matches even-indexed elements.</p>
+            <ul class="root-of-nth-child-even-search">
+                <li>first child</li>
+                <li>Second child</li>
+                <li>Third child</li>
+                <li>Fourth child</li>
+                <li>Fifth child</li>
+                <li>Sixth child</li>
+                <li>Seventh child</li>
+            </ul>
 
-            <h4>exactly this one, specific, nth child</h4>
-            <p><code>:nth-child(2)</code> will target exactly the given element when it is the second child element of its parent.</p>
+            <h4>:nth-child(odd)</h4>
+            <p><code>:nth-child(odd)</code>matches odd-indexed elements.</p>
+            <ul class="root-of-nth-child-odd-search">
+                <li>first child</li>
+                <li>Second child</li>
+                <li>Third child</li>
+                <li>Fourth child</li>
+                <li>Fifth child</li>
+                <li>Sixth child</li>
+                <li>Seventh child</li>
+            </ul>
+
+            <p>Some of these function-like pseudo-elements are invoked with <code>(n+x)</code>, where <code>n</code> is a literal representing the run-time index of the current element child the browser is iterating over, and <code>x</code> is an integer offset provided by the developer, which may be negative, or 0. If <code>x</code> is 0, it may be omitted, meaning the invocation becomes just <code>(n)</code>.</p>
+
+            <p> Note that the literal <code>n</code> may be expressed as a negative, <code>-n</code>, for particular effects.</p>
+
+            <p>This type of selector matches when a child element when the index of that child element is the result of the evaluation of terms inside the parentheses.</p>
+
+
+
+            <h4>:nth-child(n+x)</h4>
+            <h5>exactly this one, specific, nth child</h5>
+            <p><code>:nth-child(2)</code> will match exactly the second child.</p>
             <ul class="root-of-nth-child-search">
                 <li>first child</li>
                 <li>Second child</li>
@@ -263,7 +321,7 @@
                 <li>Seventh child</li>
             </ul>
 
-            <h4>every nth child</h4>
+            <h5>every nth child</h5>
             <p><code>:nth-child(2n)</code> - an element of this type will be matched if it is 2 * nth child element of its parent (where n is the series 0 to the number of child elements).</p>
             <ul class="root-of-nth-child-xn-search">
                 <li>first child</li>
@@ -275,33 +333,9 @@
                 <li>Seventh child</li>
             </ul>
 
-            <h4>every nth child starting with offset</h4>
-            <p><code>:nth-child(3n+2)</code> - an element of this type will be matched if it is 3 * n + 2th child element of its parent (where n is the series 0 to the number of child elements). Note that although in this example the offset is +2, the offset may be negative.</p>
+            <h5>every nth child starting with offset</h5>
+            <p><code>:nth-child(3n+2)</code> - an element of this type will be matched if it is 3 * n + 2th child element of its parent (where n is the series 0 to the number of child elements).</p>
             <ul class="root-of-nth-child-xn-offset-search">
-                <li>first child</li>
-                <li>Second child</li>
-                <li>Third child</li>
-                <li>Fourth child</li>
-                <li>Fifth child</li>
-                <li>Sixth child</li>
-                <li>Seventh child</li>
-            </ul>
-
-            <h4>every even child</h4>
-            <p>an element of this type will be matched if it is an even child of its parent</p>
-            <ul class="root-of-nth-child-even-search">
-                <li>first child</li>
-                <li>Second child</li>
-                <li>Third child</li>
-                <li>Fourth child</li>
-                <li>Fifth child</li>
-                <li>Sixth child</li>
-                <li>Seventh child</li>
-            </ul>
-
-            <h4>every odd child</h4>
-            <p>an element of this type will be matched if it is an odd child of its parent</p>
-            <ul class="root-of-nth-child-odd-search">
                 <li>first child</li>
                 <li>Second child</li>
                 <li>Third child</li>
@@ -313,9 +347,9 @@
         </article>
 
         <article>
-            <h3>nth-last-child</h3>
+            <h4>nth-last-child</h4>
 
-            <h4>exactly this one, specific, nth-last child</h4>
+            <h5>exactly this one, specific, nth-last child</h5>
             <p><code>:nth-last-child(2)</code> will target exactly the given element when it is the second last child element of its parent.</p>
             <ul class="root-of-nth-last-child-search">
                 <li>first child</li>
@@ -327,8 +361,9 @@
                 <li>Seventh child</li>
             </ul>
 
-            <h4>every nth-last child</h4>
+            <h5>every nth-last child</h5>
             <p><code>:nth-last-child(2n)</code> - an element of this type will be matched if it is 2 * nth-last child element of its parent (where n is the series 0 to the number of child elements).</p>
+            <p>Note that this is less specific than <code>:nth-last-of-typ</code></p>
             <ul class="root-of-nth-child-xn-search">
                 <li>first child</li>
                 <li>Second child</li>
@@ -339,7 +374,7 @@
                 <li>Seventh child</li>
             </ul>
 
-            <h4>every nth-last child with offset</h4>
+            <h5>every nth-last child with offset</h5>
             <p><code>:nth-last-child(3n+2)</code> - an element of this type will be matched if it is 3 * n + 2th child element of its parent (where n is the series 0 to the number of child elements). Note that although in this example the offset is +2, the offset may be negative.</p>
             <ul class="root-of-nth-child-xn-last-offset-search">
                 <li>first child</li>
@@ -354,30 +389,14 @@
         </article>
 
         <article>
-            <h3>nth-of-type</h3>
+            <h4>:nth-of-type(n+x)</h4>
             <p>As nth-child, but only elements of the element type to match are included in the evaluation of the child count.</p>
         </article>
 
         <article>
-            <h3>nth-last-of-type</h3>
+            <h4>nth-last-of-type</h4>
             <p>As nth-of-type, but only elements of the element type to match are included in the evaluation of the child count.</p>
         </article>
-
-        <article>
-            <h3>is</h3>
-            <p><code>is</code> (<code>matches</code> that was), takes a list of elements, any one of which will cause a match. Here, elements selected with <code>:is(span, q)</code> are coloured blue:</p>
-            <div class="root-of-is-search">
-                <span>I'm a <code>span</code></span> whereas <q>I'm a <code>q</code></q> and <i>I'm an <code>i</code></i>.
-            </div>
-            <p>Note that unlike the usual parsing rules of CSS, the selector list within <code>is</code> is forgiving: if a selector within <code>is</code> is not recognised by the browser, rather than invalidating the entire selector containing <code>is</code>, only the individual invalid selector within <code>is</code> is ignored.</p>
-            <p>Check browser support.</p>
-        </article>
-
-        <article>
-            <h3>where</h3>
-            <p><code>where</code> always has a specificity of 0, but otherwise is identical to <code>is</code>. <code>is</code> takes the specificity of the most specific selector in its arguments.
-        </article>
-
 
     </section>
 

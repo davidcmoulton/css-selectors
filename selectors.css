@@ -101,6 +101,10 @@ dt {
     font-weight: bold;
 }
 
+/* grid column selector */
+.grid-column-search  || .candidate {
+  font-weight: bold;
+}
 
 /** Pseudo-classes **/
 /* root */
@@ -109,18 +113,21 @@ dt {
 }
 
 /* empty */
-.root-of-empty-search :empty:after {
-    content: "[empty element]";
+.root-of-empty-search li:empty {
+  max-width: 25%;
+  background-color: red;
+  background-size: 50px 50px;
+  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.5) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 0.5) 75%, transparent 75%, transparent);
 }
 
 /* unique children */
 .root-of-only-child-search p span:only-child {
-    font-variant: small-caps;
+    font-weight: bold;
 }
 
 /* unique children of type */
-.root-of-only-child-of-type-search p span:only-of-type {
-    font-variant: small-caps;
+.root-of-only-of-type-search p span:only-of-type {
+    font-weight: bold;
 }
 
 /* first child */
@@ -128,8 +135,8 @@ dt {
     font-weight: bold;
 }
 
-/* first child of type */
-.root-of-first-child-of-type-search span:first-of-type {
+/* first of type */
+.root-of-first-of-type-search span:first-of-type {
     font-weight: bold;
 }
 
@@ -138,8 +145,8 @@ dt {
     font-weight: bold;
 }
 
-/* last child of type */
-.root-of-last-child-of-type-search span:last-of-type {
+/* last of type */
+.root-of-last-of-type-search span:last-of-type {
     font-weight: bold;
 }
 
@@ -186,23 +193,28 @@ dt {
 
 
 /* dynamic pseudo classes on a element */
-.root-of-link-pseudo-classes-search .link-back-individual a:link {
+.root-of-link-pseudo-classes-search .link-individual a:link {
     color: green;
 }
 
-.root-of-link-pseudo-classes-search a.link-back-individual:visited {
+.root-of-link-pseudo-classes-search a.link-individual:visited {
     color: red;
 }
 
-.root-of-link-pseudo-classes-search a.link-back-individual:hover {
+.root-of-link-pseudo-classes-search a.link-individual:hover {
     color: blue;
 }
 
-.root-of-link-pseudo-classes-search a.link-back-individual:active {
+.root-of-link-pseudo-classes-search a.link-individual:active {
     font-weight: bold;
 }
 
-.root-of-link-pseudo-classes-search a.link-back-any {
+.root-of-link-pseudo-classes-search a.link-any {
+    font-style: italic;
+    color: cadetblue;
+}
+
+.root-of-link-pseudo-classes-search a.link-any {
     font-style: italic;
     color: cadetblue;
 }

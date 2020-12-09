@@ -30,18 +30,18 @@
 
         <article>
             <h3>class selector</h3>
-            <p>Make elements <span class="cls-bigger">bigger</span> with <code>.cls-bigger {  font-size: 1.5em; }</code> </p>
+            <p>Match <span class="cls-bigger">elements with the class name <code>.cls-bigger</code></span></p>
         </article>
 
         <article>
             <h3>multiple class selector</h3>
-            <p><span class="cls-bigger cls-blue">Italicise</span> elements that are both
-                <span class="cls-bigger">bigger</span> and <span class="cls-blue">blue</span> with <code>.cls-bigger.cls-blue { font-style: italic; }</code> </p>
+            <p>Match <span class="cls-bigger cls-blue">an element</span> that is both
+                <code>.cls-bigger</code> and <code>.cls-blue</code> with the multiple class selector <code>.cls-bigger.cls-blue</code>. In this case let's italicise it.</p>
         </article>
 
         <article>
             <h3>id selector</h3>
-            <p>Make <span id="me">#me</span> bold with <code>#me { font-weight: bold; }</code></p>
+            <p>Match <span id="me">an element with an id of <code>me</code></span> with the selector <code>#me</code></p>
         </article>
     </section>
 
@@ -49,23 +49,18 @@
         <h2>Attributes</h2>
         <article>
             <h3>attribute selector: simple presence</h3>
-            <p>Make uppercase an element assigned the attribute <code>data-hello-world</code> with the selector <code>[data-hello-world] { text-transform: uppercase; }</code>. This will match no matter what the value of the attribute, or even if the attribute doesn't have a value.</p>
+            <p>Match an element assigned the attribute <code>data-hello-world</code> with the selector <code>[data-hello-world]</code>. This will match no matter what the value of the attribute, or even if the attribute doesn't have a value.</p>
             <ul>
-                <li>With <code>data-hello-world="true"</code>: <span data-hello-world="true">I'm uppercase</span>;</li>
-                <li>with <code>data-hello-world="unicorns"</code>: <span data-hello-world="unicorns">I'm also uppercase</span>, and</li>
-                <li>with the minimal <code>data-hello-world</code>: <span data-hello-world>I'm still uppercase</span>.</li>
+                <li><code>data-hello-world="true"</code> <span data-hello-world="true">matches</span>;</li>
+                <li><code>data-hello-world="false"</code> <span data-hello-world="true">matches</span>;</li>
+                <li><code>data-hello-world="unicorns"</code> <span data-hello-world="unicorns">matches</span>, and</li>
+                <li>the minimal <code>data-hello-world</code> also <span data-hello-world> matches</span>.</li>
             </ul>
         </article>
 
         <article>
-            <h3>attribute selector: exact value match, case sensitive</h3>
-            <p>Only highlight in yellow those elements with the attribute <code>data-highlight-color</code> set to the case-senitive value of "yellow".</p>
-            <p>The attribute <code data-highlight-color="yellow">data-highlight-color="yellow"</code> matches the selector <code>[data-highlight-color="yellow"]</code>, but the attribute <code data-highlight-color="YELLOW">data-highlight-color="YELLOW"</code> doesn't.</p>
-        </article>
-
-        <article>
             <h3>attribute selector: exact value match, case insensitive</h3>
-            <p>Only highlight in blue those elements with the attribute <code>data-highlight-color</code> set to the value "blue" or e.g. "BLUE":</p>
+            <p>Match those elements with the attribute <code>data-highlight-color</code> set to the value "blue" <strong>or</strong> e.g. "BLUE" using the selector <code>[data-highlight-color="blue" i]</code></p>
             <ul>
                 <li><code data-highlight-color="blue">data-highlight-color="blue"</code></li>
                 <li><code data-highlight-color="BLUE">data-highlight-color="BLUE"</code></li>
@@ -73,8 +68,8 @@
         </article>
 
         <article>
-            <h3>attribute selector: exact value match, explicitly case sensitive</h3>
-            <p>Only highlight in red those elements with the attribute <code>data-highlight-color</code> set to the value "RED" but not, e.g. "red":</p>
+            <h3>attribute selector: exact value match, implicitly case sensitive</h3>
+            <p>Only match those elements with the attribute <code>data-highlight-color</code> set to the value "RED" <strong>but not</strong>, e.g. "red", using the selector <code>[data-highlight-color="RED"]</code>:</p>
             <ul>
                 <li><code data-highlight-color="red">data-highlight-color="red"</code></li>
                 <li><code data-highlight-color="RED">data-highlight-color="RED"</code></li>

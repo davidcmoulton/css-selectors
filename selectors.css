@@ -33,10 +33,10 @@ dt {
 /** Attributes **/
 /* attribute - simple presence */
 [data-hello-world] {
-    text-transform: uppercase;
+    font-weight: bold;
 }
 
-/* attribute - exact match */
+/* attribute - exact match, case sensitive */
 [data-highlight-color="yellow"] {
     background-color: yellow;
 }
@@ -46,8 +46,8 @@ dt {
     background-color: skyblue;
 }
 
-/* attribute - exact match, case sensitive */
-[data-highlight-color="RED" s] {
+/* attribute - exact match, implicitly case sensitive */
+[data-highlight-color="RED"] {
     background-color: darkred;
     color: white
 }

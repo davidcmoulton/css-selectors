@@ -16,12 +16,12 @@
         <h2>Basic</h2>
         <article>
             <h3>Universal selector</h3>
-            <p>Match all non-pseudo-elements with <code>*</code>. Pseudo-elements need their own selectors, e.g. <code>*::after</code> will match all <code>after</code> pseudo-elements.</p>
+            <p>Match all non-pseudo-elements with <code>*</code>.</p>
         </article>
 
         <article>
             <h3>Element selector</h3>
-            <p>Match the <code>&lt;dt&gt;</code> element with <code>dt</code>, so you can say this: <code>dt {  text-transform: uppercase; }</code>, and get this:</p>
+            <p>Match the <code>&lt;dt&gt;</code> element with the <code>dt</code> selector, so you can say this: <code>dt {  text-transform: uppercase; }</code>, and get this:</p>
             <dl>
                 <dt>Some term</dt>
                 <dd>An amazingly spot on definition of "some term".</dd>
@@ -49,18 +49,18 @@
         <h2>Attributes</h2>
         <article>
             <h3>attribute selector: simple presence</h3>
-            <p>Make uppercase an element assigned the attribute <code>data-hello-world</code> with <code>[data-hello-world] { text-transform: uppercase; }</code>. This will match no matter what the value of the attribute, or even if the attribute doesn't have a value.</p>
+            <p>Make uppercase an element assigned the attribute <code>data-hello-world</code> with the selector <code>[data-hello-world] { text-transform: uppercase; }</code>. This will match no matter what the value of the attribute, or even if the attribute doesn't have a value.</p>
             <ul>
                 <li>With <code>data-hello-world="true"</code>: <span data-hello-world="true">I'm uppercase</span>;</li>
                 <li>with <code>data-hello-world="unicorns"</code>: <span data-hello-world="unicorns">I'm also uppercase</span>, and</li>
-                <li>With the minimal <code>data-hello-world</code>: <span data-hello-world>I'm still uppercase</span>.</li>
+                <li>with the minimal <code>data-hello-world</code>: <span data-hello-world>I'm still uppercase</span>.</li>
             </ul>
         </article>
 
         <article>
-            <h3>attribute selector: exact value match</h3>
-            <p>Only highlight in yellow those elements with the attribute <code>data-highlight-color</code> set to the value "yellow".</p>
-            <p>The attribute <code data-highlight-color="yellow">data-highlight-color="yellow"</code> matches <code>[data-highlight-color="yellow"]</code>, but <code data-highlight-color="none">data-highlight-color="none"</code> doesn't. Nor does the same value in a different case, e.g. <code data-highlight-color="YELLOW">data-highlight-color="YELLOW"</code></p>
+            <h3>attribute selector: exact value match, case sensitive</h3>
+            <p>Only highlight in yellow those elements with the attribute <code>data-highlight-color</code> set to the case-senitive value of "yellow".</p>
+            <p>The attribute <code data-highlight-color="yellow">data-highlight-color="yellow"</code> matches the selector <code>[data-highlight-color="yellow"]</code>, but the attribute <code data-highlight-color="YELLOW">data-highlight-color="YELLOW"</code> doesn't.</p>
         </article>
 
         <article>
@@ -276,29 +276,6 @@
         </article>
 
         <article>
-            <h4>:nth-child(even)</h4>
-            <p><code>:nth-child(even)</code>matches even-indexed elements.</p>
-            <ul class="root-of-nth-child-even-search">
-                <li>first child</li>
-                <li>Second child</li>
-                <li>Third child</li>
-                <li>Fourth child</li>
-                <li>Fifth child</li>
-                <li>Sixth child</li>
-                <li>Seventh child</li>
-            </ul>
-
-            <h4>:nth-child(odd)</h4>
-            <p><code>:nth-child(odd)</code>matches odd-indexed elements.</p>
-            <ul class="root-of-nth-child-odd-search">
-                <li>first child</li>
-                <li>Second child</li>
-                <li>Third child</li>
-                <li>Fourth child</li>
-                <li>Fifth child</li>
-                <li>Sixth child</li>
-                <li>Seventh child</li>
-            </ul>
             <h4>The An+B microsyntax</h4>
             <p>Some of these function-like pseudo-elements are invoked with <code>(An+B)</code>, which can be useful to match a specific child, or all child elements at regularly spaced intervals. Child-indexed pseudo-class selectors using this microsyntax match a child element when its index is the result of the evaluation of terms inside the parentheses. You can think of the child list as being is divided into <code>A</code> groups (the last group also containing any remainder), and it's the <code>B</code>th element of each group that is matched.</p>
             <p>For <code>An+B</code>, <code>n</code> is a literal representing consecutive integers between 0 and the number of child elements, <code>A</code>represents a multiple of <code>n</code>, and <code>B</code> is an integer offset which may be positive, negative, or 0.</p>
@@ -311,8 +288,10 @@
             <p>Just a few of the things you can do with this are shown as examples below:</p>
 
 
-            <h4>:nth-child(An+B)</h4>
+            <h4>:nth-child(An+B of S)</h4>
             <p>Counts from the beginning of the list of child elements.</p>
+            <p><code>S</code> represents a user-supplied selector list used to scope the child list, think of it as a more flexible version of <code>:nth-of-type</code> where you're not restricted to scoping by the type of the child element. [Note that as at December 2020, only Safari supports <code>of S</code>, so the scoping isn't ready for prime time yet, but keep an eye on the
+                <a href="https://caniuse.com/css-nth-child-of">browser support</a>.</p>
             <h5>exactly this one, specific child</h5>
             <p><code>:nth-child(2)</code> will match exactly the second child.</p>
             <ul class="root-of-nth-child-search">
@@ -338,7 +317,7 @@
             </ul>
 
             <h5>every second child</h5>
-            <p><code>:nth-child(2n)</code> will match every other child, starting with the second (similar to <code>:nth-child(even)</code>).</p>
+            <p><code>:nth-child(2n)</code> will match every other child, starting with the second. (Note that <code>2n</code> is aliased to <code>even</code>, so the more readable <code>:nth-child(even)</code> may be preferred.)</p>
             <ul class="root-of-nth-child-xn-even-search">
                 <li>first child</li>
                 <li>Second child</li>
@@ -349,7 +328,7 @@
                 <li>Seventh child</li>
             </ul>
 
-            <p><code>:nth-child(2n+1)</code> will match every other child, starting with the first (similar to <code>:nth-child(odd)</code>).</p>
+            <p><code>:nth-child(2n+1)</code> will match every other child, starting with the first. (Note that <code>2n+1</code> is aliased to <code>odd</code>, so the more readable <code>:nth-child(odd)</code> may be preferred.)</p>
             <ul class="root-of-nth-child-xn-odd-search">
                 <li>first child</li>
                 <li>Second child</li>
@@ -429,6 +408,7 @@
                 <button type="submit">A submit button</button>
                 <button type="reset">A reset button</button>
             </form>
+<!--            TODO: Update indeterminate -->
             <p>There is also the <code>:indeterminate</code>, pseudo class that can only be added programatically.</p>
         </article>
 
@@ -464,6 +444,10 @@
 
     <section>
         <h2>Pseudo-elements</h2>
+<!--        TODO:
+                ::before
+                ::after
+                -->
         <p>Pseudo element syntax uses '::' prefix (cf ':' prefix for pseudo classes).</p>
 
         <article>

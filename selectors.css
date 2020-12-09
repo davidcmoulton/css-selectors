@@ -155,8 +155,17 @@ dt {
     font-weight: bold;
 }
 
+/* nth-child(-n+x) */
+.root-of-nth-child-first-four-search li:nth-child(-n+4) {
+  font-weight: bold;
+}
+
 /* nth-child(xn) */
-.root-of-nth-child-xn-search li:nth-child(2n) {
+.root-of-nth-child-xn-even-search li:nth-child(2n) {
+    font-weight: bold;
+}
+
+.root-of-nth-child-xn-odd-search li:nth-child(2n+1) {
     font-weight: bold;
 }
 

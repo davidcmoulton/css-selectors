@@ -272,7 +272,7 @@
         <article>
             <h3>:last-of-type</h3>
             <p><code>:last-of-type</code> is the converse of <code>:first-of-type</code>.</p>
-            <p class="root-of-last-of-type-search">Here is a <span>span</span>, and another <span>span</span>. And here is a <label>label</label>.</p>
+            <p class="root-of-last-of-type-search">This paragraph contains a <label><code>&lt;label&gt;</code></label>, this first <span><code>&lt;span&gt;</code> which doesn't match</span>, and this second <span><code>&lt;span&gt;</code>, which does</span>.</p>
         </article>
 
         <article>
@@ -299,17 +299,21 @@
                 <li>Sixth child</li>
                 <li>Seventh child</li>
             </ul>
+            <h4>The An+B microsyntax</h4>
+            <p>Some of these function-like pseudo-elements are invoked with <code>(An+B)</code>, which can be useful to match a specific child, or all child elements at regularly spaced intervals. Child-indexed pseudo-class selectors using this microsyntax match a child element when its index is the result of the evaluation of terms inside the parentheses. You can think of the child list as being is divided into <code>A</code> groups (the last group also containing any remainder), and it's the <code>B</code>th element of each group that is matched.</p>
+            <p>For <code>An+B</code>, <code>n</code> is a literal representing consecutive integers between 0 and the number of child elements, <code>A</code>represents a multiple of <code>n</code>, and <code>B</code> is an integer offset which may be positive, negative, or 0.</p>
+            <ul>
+                <li>If <code>A</code> is 0 it may be omitted, so the expression becomes <code>(B)</code>, which will match exactly one element with that index (if a child element of the specified index exists).</li>
+                <li>If <code>A</code> is 1 or -1, it may be omitted, as long as the correct sign is applied to <code>n</code>, so that <code>1n</code> becomes <code>n</code> and <code>-1n</code> becomes <code>-n</code>.</li>
+                <li>If B is 0 it may be omitted, so the expression becomes <code>(An)</code>, which will match every Ath child element.</li>
+                <li>If B is negative, the expression becomes <code>(An-B)</code></li>
+            </ul>
+            <p>Just a few of the things you can do with this are shown as examples below:</p>
 
-            <p>Some of these function-like pseudo-elements are invoked with <code>(n+x)</code>, where <code>n</code> is a literal representing the run-time index of the current element child the browser is iterating over, and <code>x</code> is an integer offset provided by the developer, which may be negative, or 0. If <code>x</code> is 0, it may be omitted, meaning the invocation becomes just <code>(n)</code>.</p>
 
-            <p> Note that the literal <code>n</code> may be expressed as a negative, <code>-n</code>, for particular effects.</p>
-
-            <p>This type of selector matches when a child element when the index of that child element is the result of the evaluation of terms inside the parentheses.</p>
-
-
-
-            <h4>:nth-child(n+x)</h4>
-            <h5>exactly this one, specific, nth child</h5>
+            <h4>:nth-child(An+B)</h4>
+            <p>Counts from the beginning of the list of child elements.</p>
+            <h5>exactly this one, specific child</h5>
             <p><code>:nth-child(2)</code> will match exactly the second child.</p>
             <ul class="root-of-nth-child-search">
                 <li>first child</li>
@@ -321,9 +325,9 @@
                 <li>Seventh child</li>
             </ul>
 
-            <h5>every nth child</h5>
-            <p><code>:nth-child(2n)</code> - an element of this type will be matched if it is 2 * nth child element of its parent (where n is the series 0 to the number of child elements).</p>
-            <ul class="root-of-nth-child-xn-search">
+            <h5>the first 4 children</h5>
+            <p><code>:nth-child(-n+4)</code> will match the first four children.</p>
+            <ul class="root-of-nth-child-first-four-search">
                 <li>first child</li>
                 <li>Second child</li>
                 <li>Third child</li>
@@ -333,8 +337,31 @@
                 <li>Seventh child</li>
             </ul>
 
-            <h5>every nth child starting with offset</h5>
-            <p><code>:nth-child(3n+2)</code> - an element of this type will be matched if it is 3 * n + 2th child element of its parent (where n is the series 0 to the number of child elements).</p>
+            <h5>every second child</h5>
+            <p><code>:nth-child(2n)</code> will match every other child, starting with the second (similar to <code>:nth-child(even)</code>).</p>
+            <ul class="root-of-nth-child-xn-even-search">
+                <li>first child</li>
+                <li>Second child</li>
+                <li>Third child</li>
+                <li>Fourth child</li>
+                <li>Fifth child</li>
+                <li>Sixth child</li>
+                <li>Seventh child</li>
+            </ul>
+
+            <p><code>:nth-child(2n+1)</code> will match every other child, starting with the first (similar to <code>:nth-child(odd)</code>).</p>
+            <ul class="root-of-nth-child-xn-odd-search">
+                <li>first child</li>
+                <li>Second child</li>
+                <li>Third child</li>
+                <li>Fourth child</li>
+                <li>Fifth child</li>
+                <li>Sixth child</li>
+                <li>Seventh child</li>
+            </ul>
+
+            <h5>every third child, starting counting from the second</h5>
+            <p><code>:nth-child(3n+2)</code> will match the second child, then every third one after that.</p>
             <ul class="root-of-nth-child-xn-offset-search">
                 <li>first child</li>
                 <li>Second child</li>
@@ -343,65 +370,35 @@
                 <li>Fifth child</li>
                 <li>Sixth child</li>
                 <li>Seventh child</li>
+                <li>Eighth child</li>
+                <li>Ninth child</li>
+                <li>Tenth child</li>
+                <li>Eleventh child</li>
+                <li>Twelfth child</li>
+                <li>Thirteenth child</li>
+                <li>Fourteenth child</li>
             </ul>
         </article>
 
         <article>
-            <h4>nth-last-child</h4>
-
-            <h5>exactly this one, specific, nth-last child</h5>
-            <p><code>:nth-last-child(2)</code> will target exactly the given element when it is the second last child element of its parent.</p>
-            <ul class="root-of-nth-last-child-search">
-                <li>first child</li>
-                <li>Second child</li>
-                <li>Third child</li>
-                <li>Fourth child</li>
-                <li>Fifth child</li>
-                <li>Sixth child</li>
-                <li>Seventh child</li>
-            </ul>
-
-            <h5>every nth-last child</h5>
-            <p><code>:nth-last-child(2n)</code> - an element of this type will be matched if it is 2 * nth-last child element of its parent (where n is the series 0 to the number of child elements).</p>
-            <p>Note that this is less specific than <code>:nth-last-of-typ</code></p>
-            <ul class="root-of-nth-child-xn-search">
-                <li>first child</li>
-                <li>Second child</li>
-                <li>Third child</li>
-                <li>Fourth child</li>
-                <li>Fifth child</li>
-                <li>Sixth child</li>
-                <li>Seventh child</li>
-            </ul>
-
-            <h5>every nth-last child with offset</h5>
-            <p><code>:nth-last-child(3n+2)</code> - an element of this type will be matched if it is 3 * n + 2th child element of its parent (where n is the series 0 to the number of child elements). Note that although in this example the offset is +2, the offset may be negative.</p>
-            <ul class="root-of-nth-child-xn-last-offset-search">
-                <li>first child</li>
-                <li>Second child</li>
-                <li>Third child</li>
-                <li>Fourth child</li>
-                <li>Fifth child</li>
-                <li>Sixth child</li>
-                <li>Seventh child</li>
-            </ul>
-
+            <h4>:nth-last-child(An+B)</h4>
+            <p>The same as <code>:nth-child</code>, but counting from the end rather than the beginning of the list of child elements.</p>
         </article>
 
         <article>
-            <h4>:nth-of-type(n+x)</h4>
-            <p>As nth-child, but only elements of the element type to match are included in the evaluation of the child count.</p>
+            <h4>:nth-of-type(An+B)</h4>
+            <p>As <code>:nth-child</code>, but only elements of the element type to match are included in the evaluation of the child count. It is more specific than <code>:nth-child</code>.</p>
         </article>
 
         <article>
-            <h4>nth-last-of-type</h4>
-            <p>As nth-of-type, but only elements of the element type to match are included in the evaluation of the child count.</p>
+            <h4>:nth-last-of-type(An+B)</h4>
+            <p>As <code>:nth-last-child</code>, but only elements of the element type to match are included in the evaluation of the child count. It is more specific than <code>:nth-last-child</code>.</p>
         </article>
 
     </section>
 
     <section>
-        <h2>Pseudo classes: dynamic</h2>
+        <h2>Dynamic pseudo-classes</h2>
         <article>
             <h3>the anchor element's - :link, :visited, :hover, :active, :any-link</h3>
             <p>matches a elements in a particular dynamic state.</p>

@@ -32,50 +32,45 @@ dt {
 
 /** Attributes **/
 /* attribute - simple presence */
-[data-hello-world] {
+.attribute-simple-presence-search [data-hello-world] {
     font-weight: bold;
 }
 
-/* attribute - exact match, case sensitive */
-[data-highlight-color="yellow"] {
-    background-color: yellow;
-}
-
 /* attribute - exact match, case insensitive */
-[data-highlight-color="blue" i] {
+.attribute-exact-match-case-insensitive-search [data-highlight-color="blue" i] {
     background-color: skyblue;
 }
 
 /* attribute - exact match, implicitly case sensitive */
-[data-highlight-color="RED"] {
+.attribute-exact-match-case-sensitive-search [data-highlight-color="RED"] {
     background-color: darkred;
     color: white
 }
 
 /* attribute - word match */
-[data-floor-type~="grass"] {
+.attribute-word-match-search [data-floor-type~="grass"] {
     color: green;
     font-weight: bold;
 }
 
 /* attribute - ends-with match */
-[href$=".pdf"]::after {
+.attribute-ends-with-match-search [href$=".pdf"]::after {
     content: " [pdf]";
 }
 
 /* attribute - starts-with match */
-.external-link-search [href^="http"]::after {
+.attribute-starts-with-search [href^="http"]::after {
     content: ' [I can\'t believe you\'re leaving me!]';
     font-size: 0.85rem;
 }
 
 /* attribute - substring match */
-[href*="untrusted"] {
+.attribute-substring-match [href*="untrusted"] {
     color: red;
 }
 
 /* attribute - beginning of a hyphen-separated value list */
-[hreflang|="en"] {
+.attribute-hyphen-separated-list-start-search [hreflang|="en"] {
     color: steelblue;
 }
 
@@ -88,7 +83,7 @@ dt {
 
 /* child */
 .child-selector-search > p {
-    color: blue;
+    color: steelblue;
 }
 
 /* adjacent sibling */
@@ -107,6 +102,22 @@ dt {
 }
 
 /** Pseudo-classes **/
+
+/* not, single selector */
+.not-single-selector-search li:not(:nth-child(3)) {
+    font-weight: bold;
+}
+
+/* not, multiple single selectors */
+.not-multiple-single-selectors-search li:not(:first-child):not(:last-child) {
+    font-weight: bold;
+}
+
+/* not, selector list */
+.not-selector-list-search li:not(:first-child):not(:last-child) {
+    font-weight: bold;
+}
+
 /* root */
 :root {
     border: 1px dashed silver;
@@ -121,17 +132,17 @@ dt {
 }
 
 /* unique children */
-.root-of-only-child-search p span:only-child {
+.only-child-search span:only-child {
     font-weight: bold;
 }
 
 /* unique children of type */
-.root-of-only-of-type-search p span:only-of-type {
+.only-of-type-search span:only-of-type {
     font-weight: bold;
 }
 
 /* first child */
-.root-of-first-child-search li:first-child {
+.first-child-search li:first-child {
     font-weight: bold;
 }
 
@@ -197,35 +208,6 @@ dt {
 /* is */
 .root-of-is-search > :is(span, q) {
     color: blue;
-}
-
-
-
-/* dynamic pseudo classes on a element */
-.root-of-link-pseudo-classes-search .link-individual a:link {
-    color: green;
-}
-
-.root-of-link-pseudo-classes-search a.link-individual:visited {
-    color: red;
-}
-
-.root-of-link-pseudo-classes-search a.link-individual:hover {
-    color: blue;
-}
-
-.root-of-link-pseudo-classes-search a.link-individual:active {
-    font-weight: bold;
-}
-
-.root-of-link-pseudo-classes-search a.link-any {
-    font-style: italic;
-    color: cadetblue;
-}
-
-.root-of-link-pseudo-classes-search a.link-any {
-    font-style: italic;
-    color: cadetblue;
 }
 
 /* dynamic UI pseudo classes */

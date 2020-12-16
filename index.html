@@ -50,7 +50,7 @@
         <article>
             <h3>attribute selector: simple presence</h3>
             <p>Match an element assigned the attribute <code>data-hello-world</code> with the selector <code>[data-hello-world]</code>. This will match no matter what the value of the attribute, or even if the attribute doesn't have a value.</p>
-            <ul>
+            <ul class="attribute-simple-presence-search">
                 <li><code>data-hello-world="true"</code> <span data-hello-world="true">matches</span>;</li>
                 <li><code>data-hello-world="false"</code> <span data-hello-world="true">matches</span>;</li>
                 <li><code>data-hello-world="unicorns"</code> <span data-hello-world="unicorns">matches</span>, and</li>
@@ -60,8 +60,8 @@
 
         <article>
             <h3>attribute selector: exact value match, case insensitive</h3>
-            <p>Match those elements with the attribute <code>data-highlight-color</code> set to the value "blue" <strong>or</strong> e.g. "BLUE" using the selector <code>[data-highlight-color="blue" i]</code></p>
-            <ul>
+            <p>Match those elements with the attribute <code>data-highlight-color</code> set to the value "blue" <strong>or</strong> e.g. "BLUE" (or any other case variation of the same string) using the selector <code>[data-highlight-color="blue" i]</code></p>
+            <ul class="attribute-exact-match-case-insensitive-search">
                 <li><code data-highlight-color="blue">data-highlight-color="blue"</code></li>
                 <li><code data-highlight-color="BLUE">data-highlight-color="BLUE"</code></li>
             </ul>
@@ -69,27 +69,29 @@
 
         <article>
             <h3>attribute selector: exact value match, implicitly case sensitive</h3>
-            <p>Only match those elements with the attribute <code>data-highlight-color</code> set to the value "RED" <strong>but not</strong>, e.g. "red", using the selector <code>[data-highlight-color="RED"]</code>:</p>
-            <ul>
+            <p>Only match those elements with the attribute <code>data-highlight-color</code> set to the value "RED" <strong>but not</strong>, e.g. "red" (nor any other case variation of the same string), using the selector <code>[data-highlight-color="RED"]</code>:</p>
+            <ul class="attribute-exact-match-case-sensitive-search">
                 <li><code data-highlight-color="red">data-highlight-color="red"</code></li>
                 <li><code data-highlight-color="RED">data-highlight-color="RED"</code></li>
             </ul>
+            <p>Note that case sensitivity can be explicitly specified with the selector <code>[data-highlight-color="RED" s]</code> under level 4, but not sure why you'd want to.</p>
         </article>
 
         <article>
             <h3>attribute selector: word match</h3>
             <p>Make the text green if "grass" is a word (a whitespace-separated string) in the value of the <code>data-floor-type</code> attribute, by matching <code>[data-floor-type~="grass"]</code> </p>
-            <ul>
-                <li><span data-floor-type="outside grass">This grass</span> has the attribute <code>data-floor-type="outside grass"</code></li>
-                <li><span data-floor-type="outside patio">This patio</span> has the attribute <code>data-floor-type="outside patio"</code></li>
+            <ul class="attribute-word-match-search">
+                <li><span data-floor-type="grass outside">this grass</span> has the attribute <code>data-floor-type="grass outside"</code> and matches</li>
+                <li><span data-floor-type="outside grass">this grass</span> has the attribute <code>data-floor-type="outside grass"</code> and matches</li>
+                <li><span data-floor-type="outside grass garden">this grass</span> has the attribute <code>data-floor-type="outside grass garden"</code> and matches</li>
+                <li><span data-floor-type="outside patio">this patio</span> has the attribute <code>data-floor-type="outside patio"</code> and doesn't match</li>
             </ul>
-            <p>Check out this <span data-floor-type="outside grass">grass</span>, and this <span data-floor-type="outside patio">patio</span></p>
         </article>
 
         <article>
             <h3>attribute selector: starts with string</h3>
             <p>Match fully qualified links with <code>[href^="http"]</code></p>
-            <ul class="external-link-search">
+            <ul class="attribute-starts-with-search">
                 <li>An <a href="http://external-link">external link</a> has an indicator</li>
                 <li>A <a href="#">page fragment link to the current page</a> doesn't</li>
             </ul>
@@ -98,24 +100,24 @@
         <article>
             <h3>attribute selector: ends with string</h3>
             <p>Match links ending in ".pdf" with <code>[href$=".pdf"]</code></p>
-            <ul>
-                <li><a href="#">Link to not-a-pdf</a></li>
-                <li><a href="made-up-path.pdf">Link to a PDF</a></li>
+            <ul class="attribute-ends-with-match-search">
+                <li>A <a href="made-up-path.pdf">link to a PDF</a> has an indicator</li>
+                <li>A <a href="#">link to not-a-pdf</a> doesn't</li>
             </ul>
         </article>
 
         <article>
-            <h3>attribute selector: value substring match</h3>
+            <h3>attribute selector: substring match</h3>
             <p>Match links containing the string "untrusted" in their path with <code>[href*="untrusted"]</code>.</p>
 
-            <p>browse the <a href="./safe/">safe</a> directory with no worries, but be careful of the
-                <a href="./untrusted">untrusted content.</a>
+            <p class="attribute-substring-match">Browse the content at <a href="./safe/"><code>./safe</code></a> with confidence, but be careful of the
+                content at <a href="./untrusted"><code>./untrusted</code></a>.
         </article>
 
         <article>
             <h3>attribute selector: beginning of a hyphen-separated value list</h3>
             <p>Used mainly for the use case: matching of elements with any <code>en</code> value of <code>hreflang</code>.</p>
-            <ul>
+            <ul class="attribute-hyphen-separated-list-start-search">
                 <li><a href="#" hreflang="en-UK">Good morning from the UK!</a></li>
                 <li><a href="#" hreflang="en-AU">G'day from Oz!</a></li>
                 <li><a href="#" hreflang="en-US">Howdy from the States!</a></li>
@@ -142,13 +144,11 @@
 
         <article>
             <h3>Child selector</h3>
-            <p>Match any child <code>&lt;p&gt;</code> of <code>.parent</code>, but none nested more deeply, by using <code>.parent > p</code>.</p>
+            <p>Match any child <code>&lt;p&gt;</code> of <code>.parent</code>, but none nested more deeply, by using <code>.parent > p</code>, in this case turning it steel blue.</p>
             <div class="child-selector-search">
-                <p>I am an immediate child.</p>
-                <p>I am another immediate child.
-                </p>
+                <p>The <code>&lt;p&gt;</code> in <code>&lt;div class="parent"&gt;&lt;p&gt;&lt;/p&gt;&lt;/div&gt;</code> is a child of <code>.parent</code>, so this matches.</p>
                 <div>
-                    <p>I am a more deeply nested descendant.</p>
+                    <p>The <code>&lt;p&gt;</code> in <code>&lt;div class="parent"&gt;&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;</code> is not a child of <code>.parent</code>, so this doesn't match.</p>
                 </div>
             </div>
         </article>
@@ -183,6 +183,65 @@
     </section>
 
     <section>
+        <h2>Logical pseudo-classes</h2>
+        <article>
+            <h3>:is</h3>
+            <p><code>:is</code> (used to be called <code>:matches</code>), takes a list of elements, any one of which will cause a match. Here, elements selected with <code>:is(span, q)</code> are coloured blue:</p>
+            <div class="root-of-is-search">
+                <span>I'm a <code>matching span</code></span> and <q>I'm a <code>matching q</code></q>, but <i>I'm a non-matching <code>i</code></i>.
+            </div>
+            <p>Note that unlike the usual parsing rules of CSS, the selector list within <code>is</code> is forgiving: if a selector within <code>is</code> is not recognised by the browser, rather than invalidating the entire selector containing <code>is</code>, only the individual invalid selector within <code>is</code> is ignored.</p>
+            <p><code>is</code> takes the specificity of the most specific selector in its arguments.</p>
+            <p><a href="https://caniuse.com/css-matches-pseudo">Check browser support</a>.</p>
+        </article>
+
+        <article>
+            <h3>:where</h3>
+            <p><code>:where</code> always has a specificity of 0, but otherwise is identical to <code>:is</code>.
+        </article>
+
+        <article>
+            <h3>:has</h3>
+            <p><code>:has</code> takes a selector list as an argument and matches the selector it's bound to when any selector in the list matches. This could easily be used to match an element based on its descendants. Before level 4 this was not possible in CSS. Unfortunately as of 2020 there is no browser support yet, but you can
+                <a href="https://caniuse.com/?search=%3Ahas">keep an eye on it</a>.</p>
+        </article>
+
+        <article>
+            <h3>:not</h3>
+            <p>
+                <code>:not</code> matches elements that do not match the supplied selector or selector list. Note that you can't pass pseudo-elements, they won't work with <code>:not</code>. Browser support is good for passing a single selector; if you want to pass a selector list (this is the level 4 addition),
+                <a href="https://caniuse.com/css-not-sel-list">check browser support</a>.
+            </p>
+
+            <h4>Passing a single selector</h4>
+            <p>To match all but the third child in the list, use <code>li:not( :nth-child(3) )</code></p>
+            <ul class="not-single-selector-search">
+                <li>I am child number 1</li>
+                <li>I am child number 2</li>
+                <li>I am child number 3</li>
+                <li>I am child number 4</li>
+            </ul>
+            <p>You can chain individual single selector <code>:not</code>s together to get some of the effect of a selector list, for example to match all but the first and last list items, you can use <code>li:not(:first-child):not(:last-child)</code></p>
+            <ul class="not-multiple-single-selectors-search">
+                <li>I am child number 1</li>
+                <li>I am child number 2</li>
+                <li>I am child number 3</li>
+                <li>I am child number 4</li>
+            </ul>
+
+
+            <h4>Passing a selector list</h4>
+            <p>To match all but the first and last list items, as above but using a selector list instead of multiple <code>:not</code> clauses, use <code>li:not( :first-child, :last-child)</code></p>
+            <ul class="not-selector-list-search">
+                <li>I am child number 1</li>
+                <li>I am child number 2</li>
+                <li>I am child number 3</li>
+                <li>I am child number 4</li>
+            </ul>
+        </article>
+    </section>
+
+    <section>
         <h2>Structural pseudo-classes</h2>
         <article>
             <h3>:root</h3>
@@ -191,7 +250,7 @@
 
         <article>
             <h3>:empty</h3>
-            <p><code>:empty</code> matches empty elements. N.B. element nodes and text nodes (including whitepsace) prevent a containing element from being empty. Comment nodes do not prevent their parent element from being empty.</p>
+            <p><code>:empty</code> matches empty elements. N.B. element nodes and text nodes (including whitespace) prevent a containing element from being empty. Comment nodes do not prevent their parent element from being empty.</p>
             <p>Here, empty list items have a background pattern applied.</p>
             <ul class="root-of-empty-search">
                 <li>First element</li>
@@ -200,48 +259,29 @@
             </ul>
         </article>
 
-        <article>
-            <h3>:is</h3>
-            <p><code>:is</code> (<code>matches</code> that was), takes a list of elements, any one of which will cause a match. Here, elements selected with <code>:is(span, q)</code> are coloured blue:</p>
-            <div class="root-of-is-search">
-                <span>I'm a <code>span</code></span> whereas <q>I'm a <code>q</code></q> and <i>I'm an <code>i</code></i>.
-            </div>
-            <p>Note that unlike the usual parsing rules of CSS, the selector list within <code>is</code> is forgiving: if a selector within <code>is</code> is not recognised by the browser, rather than invalidating the entire selector containing <code>is</code>, only the individual invalid selector within <code>is</code> is ignored.</p>
-            <p><code>is</code> takes the specificity of the most specific selector in its arguments.</p>
-            <p>Check browser support.</p>
-        </article>
-
-        <article>
-            <h3>:where</h3>
-            <p><code>:where</code> always has a specificity of 0, but otherwise is identical to <code>:is</code>.
-        </article>
-
         <h3>Child-indexed pseudo-classes</h3>
-        <p>Selectors level 3 describes matching based on the child's index relative to its parent, as encapsulated in the name of some of the pseudo-classes. Selectors level 4 allows for a non-element parent, or no parent at all, by describing an element's relative index with respect to its siblings. Language in this section refers to "child" to match the pseudo class names, but if you're in a level 4 implementation, the implied parent is not a requirement.</p>
+        <p>Selectors level 3 describes this type of matching as being based on the index of the target  element relative to its parent, as encapsulated in the inclusion of "child" in some of the pseudo-class names. Selectors level 4 allows for a non-element parent, or no parent at all, by describing an element's relative index with respect to its siblings. Language in this section refers to "child" to match the pseudo class names, but if you're in a level 4 implementation, the implied parent is not a requirement.</p>
 
         <p>Note that <em>indices are always 1-indexed</em>.</p>
 
-        <article class="root-of-only-child-search">
+        <article>
             <h3>:only-child</h3>
             <p><code>:only-child</code> matches if an element is the only child element of its parent.</p>
-            <p>In this paragraph, <span>I am the only child element, so I match, (it doesn't matter what type of element I am).</span></p>
-            <p>In this paragraph, there is more than one child, both <i>here</i> and <i>here</i>, so the <code>:only-child</code> selector doesn't find a match.</p>
-            <p>CSS Selector level 4 allows the selector to match an element without a parent. Check browser support if you need this feature.</p>
+            <p class="only-child-search">In this paragraph, <span>I am the only child element, so I match, (it doesn't matter what type of element I am).</span></p>
+            <p class="only-child-search">In this paragraph, there is more than one child, both <i>here</i> and <i>here</i>, so the <code>:only-child</code> selector doesn't find a match.</p>
         </article>
 
-        <article class="root-of-only-of-type-search">
+        <article>
             <h3>:only-of-type</h3>
             <p><code>:only-of-type</code> matches an element of specified type that is the only child element of that type of its parent. Here we're using <code>span:only-of-type</code> to target <code>&lt;span&gt;</code> elements that are the only span element of their parents:</p>
-            <p>In this paragraph, <span>this <code>&lt;span&gt;</code></span>, and <label>this <code>&lt;label&gt;</code>element</label>, are the only child elements their respective types, so the <code>span:only-child-of-type</code> selector matches the span but not the label.</p>
-            <p>In this paragraph, both <span>this <code>&lt;span&gt;</code></span>, and <span>this <code>&lt;span&gt;</code></span>, are child elements of the same parent, so the selector doesn't match.</p>
-
-            <p>CSS Selector level 4 allows the selector to match an element without a parent. Check browser support if you need this feature.</p>
+            <p class="only-of-type-search">In this paragraph, <span>this <code>&lt;span&gt;</code></span>, and <label>this <code>&lt;label&gt;</code>element</label>, are the only child elements of their respective types, so the <code>span:only-child-of-type</code> selector matches the span but not the label.</p>
+            <p class="only-of-type-search">In this paragraph, both <span>this <code>&lt;span&gt;</code></span>, and <span>this <code>&lt;span&gt;</code></span>, are child elements of the same parent, so the selector doesn't match.</p>
         </article>
 
         <article>
             <h3>:first-child</h3>
             <p><code>:first-child</code> matches an element that is the first child of its parent.</p>
-            <ul class="root-of-first-child-search">
+            <ul class="first-child-search">
                 <li>first child</li>
                 <li>second child</li>
                 <li>third child</li>
@@ -374,18 +414,27 @@
     <section>
         <h2>Dynamic pseudo-classes</h2>
         <article>
-            <h3>the anchor element's - :link, :visited, :hover, :active, :any-link</h3>
-            <p>matches a elements in a particular dynamic state.</p>
-            <div class="root-of-link-pseudo-classes-search">
-                <div><a href="#" class="link-back-individual">link back: individual pseudo classes</a></div>
-                <div><a href="#" class="link-back-any">link back: <code>any-link</code></a> matches all elements that match <code>:link</code> or <code>:visited</code>. (Check browser support.)</div>
-            </div>
+            <h3>Location pseudo-classes</h3>
+            <ul>
+                <li><code>:link</code> matches any unvisited <code>&lt;a&gt;</code>.</li>
+                <li><code>:visited</code> matches any visited <code>&lt;a&gt;</code>.</li>
+                <li><code>:local-link</code> matches any reflexive link within the current document. If the <code>href</code> includes a fragment identifier, this must be matched in the document's URL for the selector to match. No browser support data available as of 2020.</li>
+                <li><code>:any-link</code> matches any <code>&lt;a&gt;</code>, <code>&lt;area&gt;</code> or <code>&lt;link&gt;</code> with an <code>href</code> attribute.</li>
+                <li><code>:target</code> matches the element referenced by the document URL's fragment identifier, if any.</li>
+                <li><code>:target-within</code> matches when an element, or a descendant element, is referenced by the document URL's fragment identifier, if any. (This is a rare example in CSS of being able to style an ancestor based on a descendant. <a href="https://caniuse.com/mdn-css_selectors_target-within">No browser support yet as of 2020</a>).</li>
+                <li><code>:scope</code> only useful with JavaScript since <code>&lt;style scoped&gt;</code> currently lacks browser support. I've not seen a compelling reason to use it yet.</li>
+            </ul>
+            <p>Note that privacy concerns may cause a browser to disregard developer-supplied <code>:link</code> / <code>:visited</code> styles. In that case it should still style them differently from each other.</p>
         </article>
 
         <article>
-            <h3>UI state</h3>
+            <h3>User action pseudo-classes</h3>
+            <ul>
+                <li><code>:hover</code> remember not all input modes are capable of hovering</li>
+                <li><code>:active</code> for example, the state of a link between the time the mouse button is depressed to start to click on it, and the time that the button is released.</li>
+            </ul>
             <p>typically used with forms.</p>
-            <p>This example uses <code>enabled</code>, <code>disabled</code>, <code>checked</code>, <code>focus</code> and <code>focus-within</code>. Note that <code>focus-within</code> is a rare example in CSS of being able to style an ancestor depending on the state of a descendant. [Well, okay, in theory there's <code>has()</code>, but no browser supports that in November 2020.]</p>
+            <p>This example uses <code>enabled</code>, <code>disabled</code>, <code>checked</code>, <code>focus</code> and <code>focus-within</code>. Note that <code>focus-within</code> is a rare example in CSS of being able to style an ancestor depending on the state of a descendant. [Well, okay, in theory there's <code>has()</code>, but no browser supports that as of 2020.]</p>
             <form method="GET" action="#" class="root-of-ui-pseudo-classes-search root-of-ui-pseudo-classes-search--form1 focus-within">
                 <div><label for="form1_isEnabled"><code>:enabled</code></label><input type="text" id="form1_isEnabled" name="form1_isEnabled"></div>
                 <div><label for="form1_isDisabled"><code>:disabled</code></label><input type="text" id="form1_isDisabled" name="form1_isDisabled" disabled="disabled"></div>
@@ -394,7 +443,9 @@
                 <button type="submit">A submit button</button>
                 <button type="reset">A reset button</button>
             </form>
-            <p>This next form is identical to the one above, except that it uses <code>focus-visible</code> rather than <code>focus</code>. This allows the user agent to use heuristics to determine whether to show the <code>focus-visible</code> rules or not. One example is navigation mode: both tabbing through and clicking on text inputs and buttons will result in any <code>focus</code> styles being used. If you specify <code>focus-visible</code> styles instead, they will be still be displayed when tabbing through both input text fields and buttons, but won't be displayed on buttons when you click on them. This is a good thing as clicking on a button and seeing a big outline appear on it can be ugly. Check browser support.</p>
+            <h4>:focus-visible</h4>
+            <p>This next form is identical to the one above, except that it uses <code>focus-visible</code> rather than <code>focus</code>. This allows the user agent to use heuristics to determine whether to show the <code>focus-visible</code> rules or not, based on whether it seems that the user needs to know where the focus is. One example is navigation mode: both tabbing through and clicking on text inputs and buttons will result in any <code>focus</code> styles being used. If you specify <code>focus-visible</code> styles instead, they will be still be displayed when tabbing through both input text fields and buttons, but won't be displayed on buttons when you click on them. This is a good thing as clicking on a button and seeing a big outline appear on it can be ugly.
+                <a href="https://caniuse.com/css-focus-visible">Check browser support</a>.</p>
             <form method="GET" action="#" class="root-of-ui-pseudo-classes-search root-of-ui-pseudo-classes-search--form2 focus-within">
                 <div><label for="form2_isEnabled"><code>:enabled</code></label><input type="text" id="form2_isEnabled" name="form2_isEnabled"></div>
                 <div><label for="form2_isDisabled"><code>:disabled</code></label><input type="text" id="form2_isDisabled" name="form2_isDisabled" disabled="disabled"></div>
@@ -423,18 +474,6 @@
                 <li lang="pt">Ol&aacute;</li>
             </ul>
         </article>
-
-        <article>
-            <h3>:not() pseudo-class</h3>
-            <p>matches elements that do not match the negated selector:</p>
-            <ul class="root-of-negation-pseudo-classes-search">
-                <li class="include-me">I'm included</li>
-                <li class="include-me">I'm included</li>
-                <li>I'm not included</li>
-                <li class="include-me">I'm included</li>
-            </ul>
-        </article>
-
     </section>
 
     <section>

@@ -9,14 +9,14 @@
 </head>
 <body>
     <header role="banner">
-        <h1>Illustrative use of CSS selectors</h1>
+        <h1>Illustrative uses of CSS selectors</h1>
     </header>
-
+<!--TODO: mention types of selectors, see level 4 spec-->
     <section>
         <h2>Basic</h2>
         <article>
             <h3>Universal selector</h3>
-            <p>Match all non-pseudo-elements with <code>*</code>.</p>
+            <p>Match all non-pseudo-elements with <code>*</code>. So, to set all non-pseudo-elements in sans serif, use <code>* { font-family: sans-serif; }</code></p>
         </article>
 
         <article>
@@ -36,12 +36,12 @@
         <article>
             <h3>multiple class selector</h3>
             <p>Match <span class="cls-bigger cls-blue">an element</span> that is both
-                <code>.cls-bigger</code> and <code>.cls-blue</code> with the multiple class selector <code>.cls-bigger.cls-blue</code>. In this case let's italicise it.</p>
+                <code>.cls-bigger</code> and <code>.cls-blue</code> with the multiple class selector <code>.cls-bigger.cls-blue</code>. In this case let's italicise it with <code>.cls-bigger.cls-blue {font-style: italic; }</code></p>
         </article>
 
         <article>
             <h3>id selector</h3>
-            <p>Match <span id="me">an element with an id of <code>me</code></span> with the selector <code>#me</code></p>
+            <p>Use the selector <code>#me</code> to match <span id="me">an element with an id of <code>me</code></span>.</p>
         </article>
     </section>
 
@@ -79,12 +79,12 @@
 
         <article>
             <h3>attribute selector: word match</h3>
-            <p>Make the text green if "grass" is a word (a whitespace-separated string) in the value of the <code>data-floor-type</code> attribute, by matching <code>[data-floor-type~="grass"]</code> </p>
+            <p>Make the text green if "grass" is a word (a whitespace-separated string) in the value of the <code>data-ground-type</code> attribute, by matching <code>[data-ground-type~="grass"]</code> </p>
             <ul class="attribute-word-match-search">
-                <li><span data-floor-type="grass outside">this field</span> has the attribute <code>data-floor-type="grass outside"</code> and matches</li>
-                <li><span data-floor-type="outside grass">this meadow</span> has the attribute <code>data-floor-type="outside grass"</code> and matches</li>
-                <li><span data-floor-type="outside grass garden">this lawn</span> has the attribute <code>data-floor-type="outside grass garden"</code> and matches</li>
-                <li><span data-floor-type="outside patio">this patio</span> has the attribute <code>data-floor-type="outside patio"</code> and doesn't match</li>
+                <li><span data-ground-type="grass outside">this field</span> has the attribute <code>data-ground-type="grass outside"</code> and matches</li>
+                <li><span data-ground-type="outside grass">this meadow</span> has the attribute <code>data-ground-type="outside grass"</code> and matches</li>
+                <li><span data-ground-type="outside grass garden">this lawn</span> has the attribute <code>data-ground-type="outside grass garden"</code> and matches</li>
+                <li><span data-ground-type="outside patio">this patio</span> has the attribute <code>data-ground-type="outside patio"</code> and doesn't match</li>
             </ul>
         </article>
 
@@ -110,8 +110,8 @@
             <h3>attribute selector: substring match</h3>
             <p>Match links containing the string "untrusted" in their path with <code>[href*="untrusted"]</code>.</p>
 
-            <p class="attribute-substring-match">Browse the content at <a href="./safe/"><code>./safe</code></a> with confidence, but be careful of the
-                content at <a href="./untrusted"><code>./untrusted</code></a>.
+            <p class="attribute-substring-match">Browse the <a href="./safe/">safe</a> content with confidence, but be careful of the
+                <a href="./untrusted">untrusted</a> content.
         </article>
 
         <article>
@@ -146,16 +146,16 @@
             <h3>Child selector</h3>
             <p>Match any child <code>&lt;p&gt;</code> of <code>.parent</code>, but none nested more deeply, by using <code>.parent > p</code>, in this case turning it steel blue.</p>
             <div class="child-selector-search">
-                <p>The <code>&lt;p&gt;</code> in <code>&lt;div class="parent"&gt;&lt;p&gt;&lt;/p&gt;&lt;/div&gt;</code> is a child of <code>.parent</code>, so this matches.</p>
+                <p>The <code>&lt;p&gt;</code> in <code>&lt;div class="parent"&gt;&lt;p&gt;...&lt;/p&gt;&lt;/div&gt;</code> is a child of <code>.parent</code>, so this matches.</p>
                 <div>
-                    <p>The <code>&lt;p&gt;</code> in <code>&lt;div class="parent"&gt;&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;</code> is not a child of <code>.parent</code>, so this doesn't match.</p>
+                    <p>The <code>&lt;p&gt;</code> in <code>&lt;div class="parent"&gt;&lt;div&gt;&lt;p&gt;...&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;</code> is not a child of <code>.parent</code>, so this doesn't match.</p>
                 </div>
             </div>
         </article>
 
         <article>
             <h3>Adjacent sibling selector</h3>
-            <p>Match a target element that immediately follows a specified sibling with <code>immediately-preceding-sibling-selector + target</code></p>
+            <p>Match a target element that immediately follows a specified sibling with <code>immediately-preceding-sibling-selector + target-selector</code></p>
             <ul class="adjacent-sibling-search">
                 <li>earlier sibling</li>
                 <li class="specified-immediately-preceding-sibling">specified immediately preceding sibling</li>
@@ -433,8 +433,8 @@
                 <li><code>:hover</code> remember not all input modes are capable of hovering</li>
                 <li><code>:active</code> for example, the state of a link between the time the mouse button is depressed to start to click on it, and the time that the button is released.</li>
             </ul>
-            <p>typically used with forms.</p>
-            <p>This example uses <code>enabled</code>, <code>disabled</code>, <code>checked</code>, <code>focus</code> and <code>focus-within</code>. Note that <code>focus-within</code> is a rare example in CSS of being able to style an ancestor depending on the state of a descendant. [Well, okay, in theory there's <code>has()</code>, but no browser supports that as of 2020.]</p>
+            <h4>:enabled, :disabled, :checked, :focus and :focus-within</h4>
+            <p>Note that <code>focus-within</code> is a rare example in CSS of being able to style an ancestor depending on the state of a descendant. [Well, okay, in theory there's <code>has()</code>, but no browser supports that as of 2020.]</p>
             <form method="GET" action="#" class="root-of-ui-pseudo-classes-search root-of-ui-pseudo-classes-search--form1 focus-within">
                 <div><label for="form1_isEnabled"><code>:enabled</code></label><input type="text" id="form1_isEnabled" name="form1_isEnabled"></div>
                 <div><label for="form1_isDisabled"><code>:disabled</code></label><input type="text" id="form1_isDisabled" name="form1_isDisabled" disabled="disabled"></div>
@@ -444,7 +444,7 @@
                 <button type="reset">A reset button</button>
             </form>
             <h4>:focus-visible</h4>
-            <p>This next form is identical to the one above, except that it uses <code>focus-visible</code> rather than <code>focus</code>. This allows the user agent to use heuristics to determine whether to show the <code>focus-visible</code> rules or not, based on whether it seems that the user needs to know where the focus is. One example is navigation mode: both tabbing through and clicking on text inputs and buttons will result in any <code>focus</code> styles being used. If you specify <code>focus-visible</code> styles instead, they will be still be displayed when tabbing through both input text fields and buttons, but won't be displayed on buttons when you click on them. This is a good thing as clicking on a button and seeing a big outline appear on it can be ugly.
+            <p>This next form is identical to the one above, except that it uses <code>focus-visible</code> rather than <code>focus</code>. This allows the user agent to use heuristics to determine whether to apply the rules or not, based on whether it seems that the user needs to know where the focus is. One example is navigation mode: both tabbing through and clicking on text inputs and buttons will result in any <code>focus</code> styles being used, whereas if you specify <code>focus-visible</code> styles instead, the browser decides whether or not to show them when the element receives focus. This is a good thing as clicking on a button and seeing a big outline appear unnecessarily on it can be ugly.
                 <a href="https://caniuse.com/css-focus-visible">Check browser support</a>.</p>
             <form method="GET" action="#" class="root-of-ui-pseudo-classes-search root-of-ui-pseudo-classes-search--form2 focus-within">
                 <div><label for="form2_isEnabled"><code>:enabled</code></label><input type="text" id="form2_isEnabled" name="form2_isEnabled"></div>
@@ -454,10 +454,13 @@
                 <button type="submit">A submit button</button>
                 <button type="reset">A reset button</button>
             </form>
-<!--            TODO: Update indeterminate -->
-            <p>There is also the <code>:indeterminate</code>, pseudo class that can only be added programatically.</p>
         </article>
 
+        <artcle>
+            <h3>:indeterminate</h3>
+            <code>:indeterminate</code> matches a radio <code>&lt;input&gt;</code> element where no radio buttons are selected, and also a <code>&lt;progress&gt;</code> element that lacks a <code>value</code> attribute. A checkbox <code>&lt;input&gt;</code> element may match <code>:indeterminate</code> if its IDL <code>:indeterminate</code> property is set to true. Not sure in practice when that happens, but there's
+            <a href="https://html.spec.whatwg.org/multipage/input.html#dom-input-indeterminate">some details in the WHATWG spec</a>.
+        </artcle>
         <article>
             <h3>:target</h3>
             <p>matches the element with the id corresponding to the value of the fragment identifier portion of the document's URL.</p>

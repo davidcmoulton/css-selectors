@@ -3,7 +3,7 @@
 /** Basic **/
 /* universal */
 * {
-    font-family: helvetica, "Gill sans", Arial, "sans-serif";
+    font-family: sans-serif;
     line-height: 1.2;
 }
 
@@ -48,7 +48,7 @@ dt {
 }
 
 /* attribute - word match */
-.attribute-word-match-search [data-floor-type~="grass"] {
+.attribute-word-match-search [data-ground-type~="grass"] {
     color: green;
     font-weight: bold;
 }

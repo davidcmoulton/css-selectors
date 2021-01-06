@@ -452,11 +452,21 @@
             </form>
         </article>
 
-        <artcle>
+        <article>
+            <h3>Time-based pseudo-classes :past, :current and :future</h3>
+            <p>Relate to currently displayed, or active position, in some timeline. Might be used for highlighting the currently spoken phrase from VTT, for example. No browser support information available.</p>
+        </article>
+
+        <article>
+            <h3>Play-based pseudo-classes :playing and :paused</h3>
+            <p>Note that <code>:playing</code> includes situations when the user intent is that the media is playing, even if it currently isn't, for example if the resource stream is buffering. <code>:paused</code> includes the state before playing has been activated by the user.</p>
+        </article>
+
+        <article>
             <h3>:indeterminate</h3>
             <code>:indeterminate</code> matches a radio <code>&lt;input&gt;</code> element where no radio buttons are selected, and also a <code>&lt;progress&gt;</code> element that lacks a <code>value</code> attribute. A checkbox <code>&lt;input&gt;</code> element may match <code>:indeterminate</code> if its IDL <code>:indeterminate</code> property is set to true. Not sure in practice when that happens, but there's
             <a href="https://html.spec.whatwg.org/multipage/input.html#dom-input-indeterminate">some details in the WHATWG spec</a>.
-        </artcle>
+        </article>
         <article>
             <h3>:target</h3>
             <p>matches the element with the id corresponding to the value of the fragment identifier portion of the document's URL.</p>

@@ -215,24 +215,12 @@ dt {
     background-color: rgba(0, 255, 255, 0.5);
 }
 
-.root-of-ui-pseudo-classes-search :enabled {
-    border: 2px green solid;
-}
-
-.root-of-ui-pseudo-classes-search :disabled {
-    border: 2px red solid;
-}
-
-.root-of-ui-pseudo-classes-search :checked {
-    margin-left: 50px;
-}
-
 .root-of-ui-pseudo-classes-search--form1 :focus {
     outline: 5px rebeccapurple solid;
 }
 
 .root-of-ui-pseudo-classes-search--form2 :focus-visible {
-    outline: 5px rebeccapurple solid;
+    outline: 5px goldenrod solid;
 }
 
 /* target pseudo class */

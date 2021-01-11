@@ -472,12 +472,25 @@
             <p>Not showing a placeholder: <input type="text" class="may-have-placeholder"></p>
             <h4>:default</h4>
             <p>Matches the default element in a set of radio buttons or checkboxes, the initially <code>selected</code> <code>&lt;option&gt;</code> element , and form's default submit button.</p>
+            <label>radio 1<input type="radio" name="default-pseudo-class-demo"></label>
+            <label>radio 2<input type="radio" name="default-pseudo-class-demo" checked></label>
+            <label>radio 3<input type="radio" name="default-pseudo-class-demo"></label>
+            <label>radio 4<input type="radio" name="default-pseudo-class-demo"></label>
             <h4>:checked</h4>
             <p>Matches checked checkboxes and radio buttons, and <code>selected</code> <code>&lt;option&gt;</code> elements.</p>
+            <label>radio 1<input type="radio" name="checked-pseudo-class-demo"></label>
+            <label>radio 2<input type="radio" name="checked-pseudo-class-demo" checked></label>
+            <label>radio 3<input type="radio" name="checked-pseudo-class-demo"></label>
+            <label>radio 4<input type="radio" name="checked-pseudo-class-demo"></label>
             <h4>:indeterminate</h4>
             <p><code>:indeterminate</code> matches a radio <code>&lt;input&gt;</code> element where no radio buttons are selected, and also a <code>&lt;progress&gt;</code> element that lacks a <code>value</code> attribute. A checkbox <code>&lt;input&gt;</code> element may match <code>:indeterminate</code> if its IDL <code>:indeterminate</code> property is set to true. Not sure in practice when that happens, but there's
                 <a href="https://html.spec.whatwg.org/multipage/input.html#dom-input-indeterminate">some details in the WHATWG spec</a>.
             </p>
+            <label>radio 1<input type="radio" name="indeterminate-pseudo-class-demo"></label>
+            <label>radio 2<input type="radio" name="indeterminate-pseudo-class-demo"></label>
+            <label>radio 3<input type="radio" name="indeterminate-pseudo-class-demo"></label>
+            <label>radio 4<input type="radio" name="indeterminate-pseudo-class-demo"></label>
+
             <h4>:blank</h4>
             <p>Matches a user-input element that has no contents (not the same as <code>:empty</code>, which matches an element without any non-comment child nodes). Note that this is not supported in any browser and is marked as "at risk".</p>
         </article>

@@ -253,6 +253,24 @@ dt {
     color: white;
 }
 
+.root-of-input-pseudo-classes [name="default-pseudo-class-demo"]:default {
+    width: 50px;
+    height: 50px;
+}
+
+.root-of-input-pseudo-classes [name="checked-pseudo-class-demo"]:checked {
+    width: 50px;
+    height: 50px;
+}
+
+.root-of-input-pseudo-classes [name="indeterminate-pseudo-class-demo"]:indeterminate {
+    outline: 3px solid cadetblue;
+}
+
+.root-of-input-pseudo-classes [name="blank-pseudo-class-demo"]:blank {
+    outline: 3px solid cadetblue;
+}
+
 /* target pseudo class */
 :target {
     color: #333;

@@ -223,6 +223,36 @@ dt {
     outline: 5px goldenrod solid;
 }
 
+.root-of-input-pseudo-classes button:disabled {
+    background-color: #cc99cc;
+    color: white;
+}
+
+.root-of-input-pseudo-classes button:enabled {
+    background-color: cadetblue;
+    color: white;
+}
+
+.root-of-input-pseudo-classes .user-alterable:read-write {
+    background-color: cadetblue;
+    outline-width: 0;
+}
+
+.root-of-input-pseudo-classes .not-user-alterable:read-only {
+    border: 5px solid #cc99cc;
+    outline-width: 0;
+}
+
+.root-of-input-pseudo-classes .may-have-placeholder {
+    background-color: #cc99cc;
+    color: white;
+}
+
+.root-of-input-pseudo-classes .may-have-placeholder:placeholder-shown {
+    background-color: cadetblue;
+    color: white;
+}
+
 /* target pseudo class */
 :target {
     color: #333;

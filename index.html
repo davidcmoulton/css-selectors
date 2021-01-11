@@ -452,20 +452,26 @@
             </form>
         </article>
 
-        <article>
+        <article class="root-of-input-pseudo-classes">
             <h3>Input pseudo-classes</h3>
             <h4>:disabled</h4>
             <p>Matches an interactive element that's explicitly disabled.</p>
+            <button disabled="disabled">I'm disabled</button>
             <h4>:enabled</h4>
             <p>Matches an interactive element that's not explicitly disabled.</p>
+            <button>I'm not disabled</button>
             <h4>:read-write</h4>
             <p>Matches an element that's user-alterable.</p>
+            <input type="text" class="user-alterable">
             <h4>:read-only</h4>
             <p>Matches an element that's not user-alterable.</p>
+            <p class="not-user-alterable">I'm not alterable by the user.</p>
             <h4>:placeholder-shown</h4>
             <p>Matches an element that's currently displaying its placeholder.</p>
+            <p>Showing a placeholder: <input type="text" placeholder="tell all!" class="may-have-placeholder"></p>
+            <p>Not showing a placeholder: <input type="text" class="may-have-placeholder"></p>
             <h4>:default</h4>
-            <p>Matches the default element in a set of radio buttons or checkboxes, the initally <code>selected</code> <code>&lt;option&gt;</code> element , and form's default submit button.</p>
+            <p>Matches the default element in a set of radio buttons or checkboxes, the initially <code>selected</code> <code>&lt;option&gt;</code> element , and form's default submit button.</p>
             <h4>:checked</h4>
             <p>Matches checked checkboxes and radio buttons, and <code>selected</code> <code>&lt;option&gt;</code> elements.</p>
             <h4>:indeterminate</h4>

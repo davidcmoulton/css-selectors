@@ -263,12 +263,47 @@ dt {
     height: 50px;
 }
 
-.root-of-input-pseudo-classes [name="indeterminate-pseudo-class-demo"]:indeterminate {
+.root-of-input-pseudo-classes .indeterminate-pseudo-class-demo:indeterminate {
     outline: 3px solid cadetblue;
 }
 
 .root-of-input-pseudo-classes [name="blank-pseudo-class-demo"]:blank {
     outline: 3px solid cadetblue;
+}
+
+.root-of-input-pseudo-classes .validation input,
+.root-of-input-pseudo-classes .validation--required-optional input {
+    display: block;
+}
+
+.root-of-input-pseudo-classes .validation input,
+.root-of-input-pseudo-classes .validation--required-optional input {
+    outline-width: 0;
+    box-shadow: none;
+}
+
+.root-of-input-pseudo-classes .validation--required-optional input:required {
+    border: 1px solid firebrick;
+}
+
+.root-of-input-pseudo-classes .validation--required-optional input:optional {
+    border: 1px solid cadetblue;
+}
+
+.root-of-input-pseudo-classes .validation input:valid {
+    border: 2px dotted cadetblue;
+}
+
+.root-of-input-pseudo-classes .validation input:invalid {
+    border: 3px dashed firebrick;
+}
+
+.root-of-input-pseudo-classes .validation input:in-range {
+    border: 2px dotted cadetblue;
+}
+
+.root-of-input-pseudo-classes .validation input:out-of-range {
+    border: 3px dashed firebrick;
 }
 
 /* target pseudo class */

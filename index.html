@@ -486,13 +486,47 @@
             <p><code>:indeterminate</code> matches a radio <code>&lt;input&gt;</code> element where no radio buttons are selected, and also a <code>&lt;progress&gt;</code> element that lacks a <code>value</code> attribute. A checkbox <code>&lt;input&gt;</code> element may match <code>:indeterminate</code> if its IDL <code>:indeterminate</code> property is set to true. Not sure in practice when that happens, but there's
                 <a href="https://html.spec.whatwg.org/multipage/input.html#dom-input-indeterminate">some details in the WHATWG spec</a>.
             </p>
-            <label>radio 1<input type="radio" name="indeterminate-pseudo-class-demo"></label>
-            <label>radio 2<input type="radio" name="indeterminate-pseudo-class-demo"></label>
-            <label>radio 3<input type="radio" name="indeterminate-pseudo-class-demo"></label>
-            <label>radio 4<input type="radio" name="indeterminate-pseudo-class-demo"></label>
+            <p>Here, matching <code>:indeterminate</code> elements have a teal border.</p>
+            <div>
+                <label>radio 1<input type="radio" name="indeterminate-pseudo-class-demo" class="indeterminate-pseudo-class-demo"></label>
+                <label>radio 2<input type="radio" name="indeterminate-pseudo-class-demo" class="indeterminate-pseudo-class-demo"></label>
+                <label>radio 3<input type="radio" name="indeterminate-pseudo-class-demo" class="indeterminate-pseudo-class-demo"></label>
+                <label>radio 4<input type="radio" name="indeterminate-pseudo-class-demo" class="indeterminate-pseudo-class-demo"></label>
+            </div>
+            <div>
+                <p>Click on the progress indicator below to toggle the presence of a <code>value</code> attribute:</p>
+                <progress class="indeterminate-pseudo-class-demo" onclick="if(!this.getAttribute('value')){this.setAttribute('value', '0.5');}else{delete this.removeAttribute('value')}"></progress>
+            </div>
+
+            <h4>:required and :optional</h4>
+            <p>Matches a form element whose value is required or optional, respectively.</p>
+            <form action="" class="validation--required-optional">
+                <label for="validity-demo-1-1" >A required field: </label><input type="text" id="validity-demo-1-1" required>
+                <label for="validity-demo-1-2" >An optional field: </label><input type="text" id="validity-demo-1-2">
+            </form>
+
+
+            <h4>:valid and :invalid</h4>
+            <p><code>:valid</code> matches <code>&lt;input&gt;</code> and <code>&lt;form&gt;</code> elements that validate successfully.
+                <code>:invalid</code>matches elements that don't validate successfully. Elements without validity semantics can neither be
+                <code>:valid</code> nor <code>:invalid</code>.</p>
+            <form action="" class="validation">
+                <label for="validity-demo-2" >Best food in the world (hint: there is only one answer, and it's
+                    <b>"cheese"</b>)... Try it: </label><input type="text" id="validity-demo-2" pattern="cheese" value="something yucky">
+            </form>
+
+            <h4>:in-range and :out-of-range</h4>
+            <p>Applies to form control elements with data range limits range limits.
+            <form action="" class="validation">
+                <label for="validity-demo-3" >This field is only valid for numerical inputs between 1 and 5, inclusive. Try it: </label><input type="number" id="validity-demo-3" min="1" max="5" value="2">
+            </form>
+
+            <h4>:user-invalid</h4>
+            <p>A validation failure matching one of the above failure states, but only after the user has attempted to submit the form, and before they have interacted with it again. But also at other times too, at the discretion of the user-agent. No browser support yet as of Jan 2021.</p>
 
             <h4>:blank</h4>
             <p>Matches a user-input element that has no contents (not the same as <code>:empty</code>, which matches an element without any non-comment child nodes). Note that this is not supported in any browser and is marked as "at risk".</p>
+
         </article>
         <article>
             <h3>Time-based pseudo-classes :past, :current and :future</h3>

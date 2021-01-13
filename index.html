@@ -427,7 +427,7 @@
             <p>Note that privacy concerns may cause a browser to disregard developer-supplied <code>:link</code> / <code>:visited</code> styles. In that case it should still style them differently from each other.</p>
         </article>
 
-        <article>
+        <article id="user-action-pseudo-classes">
             <h3>User action pseudo-classes</h3>
             <ul>
                 <li><code>:hover</code> remember not all input modes are capable of hovering</li>
@@ -531,14 +531,16 @@
         <article>
             <h3>Time-based pseudo-classes :past, :current and :future</h3>
             <p>Relate to currently displayed, or active position, in some timeline. Might be used for highlighting the currently spoken phrase from VTT, for example. No browser support information available.</p>
+<!--            TODO: Demo-->
         </article>
 
         <article>
             <h3>Play-based pseudo-classes :playing and :paused</h3>
             <p>Note that <code>:playing</code> includes situations when the user intent is that the media is playing, even if it currently isn't, for example if the resource stream is buffering. <code>:paused</code> includes the state before playing has been activated by the user.</p>
+            <!--            TODO: Demo-->
         </article>
 
-        <article>
+        <article class="root-of-target-search">
             <h3>:target</h3>
             <p>matches the element with the id corresponding to the value of the fragment identifier portion of the document's URL.</p>
             <p><a href="#myTarget">get the target</a></p>
@@ -562,7 +564,9 @@
                 ::before
                 ::after
                 -->
-        <p>Pseudo element syntax uses '::' prefix (cf ':' prefix for pseudo classes).</p>
+        <p>Pseudo-elements are featureless, and so aren't matched by any other selector.</p>
+        <p>As pseudo-elements don't modify the document tree, they do not affect the interpretation of structural pseudo-classes.</p>
+        <p><a href="#user-action-pseudo-classes">User action pseudo-classes</a> are the only type of pseudo-classes that may be compounded to a pseudo-element, and then only if the definition of that user action pseudo-class permits it.</p>
 
         <article>
             <h3>first letter</h3>

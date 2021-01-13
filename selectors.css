@@ -307,14 +307,14 @@ dt {
 }
 
 /* target pseudo class */
-:target {
+.root-of-target-search :target {
     color: #333;
     background-color: #ff0;
 }
 
 /* lang pseudo class */
 :lang(pt) {
-    color: #34e;
+    color: darkorange;
 }
 
 /* negation pseudo class */

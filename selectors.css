@@ -323,12 +323,6 @@ dt {
     font-weight: bold;
 }
 
-/******************
- Pesudo element syntax uses '::' prefix (cf ':' prefix for pseudo classes).
- Note that IE8 is buggy and does not recognise the '::' prefix. When supporting
- IE8, specify ':pseudo-element' then '::pseudoelement' in stylesheet.
- *****************/
- 
 /* first letter pseudo element */
 .first-letter-target::first-letter {
     font-size: 200%;
@@ -339,14 +333,34 @@ dt {
     font-weight: bold;
 }
 
-/* generated content ::before */
-.put-stuff-before-me::before {
-    font-style: italic;
-    content: "am just nippin' in here, cheekily! "
+/* selection pseudo element */
+.root-of-selection-search::selection,
+.root-of-selection-search ::selection {
+    background-color: rebeccapurple;
+    color: white;
 }
 
-/* generated content ::after */
-.put-stuff-after-me::after {
-    font-style: italic;
-    content: " loitering at the end..."
+.root-of-before-search::before {
+    content: '*** ';
+}
+
+.root-of-after-search::after {
+    content: '\2026';
+}
+
+.root-of-marker-search ::marker {
+    color: firebrick;
+    font-size: 150%;
+}
+
+.root-of-placeholder-search::placeholder {
+    background-color: rebeccapurple;
+    color: white;
+    opacity: 1;
+}
+
+.root-of-file-selector-button-search ::file-selector-button {
+    background-color: rebeccapurple;
+    color: white;
+    border-radius: 5px;
 }

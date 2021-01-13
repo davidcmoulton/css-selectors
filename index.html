@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Demonstration of CSS selectors</title>
+    <title>Demonstration of CSS selectors, and some pseudo-elements</title>
     <meta name="description" content="Markup supporting selectors.css">
     <link rel="stylesheet" href="meta.css">
     <link rel="stylesheet" href="selectors.css">
 </head>
 <body>
     <header role="banner">
-        <h1>Illustrative uses of CSS selectors</h1>
+        <h1>Demonstration of CSS selectors, and some pseudo-elements</h1>
     </header>
 <!--TODO: mention types of selectors, see level 4 spec-->
     <section>
@@ -559,35 +559,81 @@
     </section>
 
     <section>
+
         <h2>Pseudo-elements</h2>
-<!--        TODO:
-                ::before
-                ::after
-                -->
+
         <p>Pseudo-elements are featureless, and so aren't matched by any other selector.</p>
         <p>As pseudo-elements don't modify the document tree, they do not affect the interpretation of structural pseudo-classes.</p>
         <p><a href="#user-action-pseudo-classes">User action pseudo-classes</a> are the only type of pseudo-classes that may be compounded to a pseudo-element, and then only if the definition of that user action pseudo-class permits it.</p>
-
+        <p>Only pseudo-elements defined to have internal structure may be followed by descendant combinators.</p>
         <article>
-            <h3>first letter</h3>
-            <p><code>::first-letter</code> matches the first letter within an element</p>
-            <p class="first-letter-target">First letter of this paragraph is bigger.</p>
-        </article>
 
-        <article>
-            <h3>first line</h3>
-            <p><code>::first-line</code> matches the first letter within an element</p>
+            <h3>Typographic pseudo-elements</h3>
+
+            <h4>::first letter</h4>
+            <p><code>::first-letter</code> matches the first letter within an element.</p>
+            <p class="first-letter-target">"First-letter" needn't be an actual letter, it refers to the first typographical letter unit on the first formatted line, so could be a digit, for example. It also includes any preceding punctuation and interleaving space. As <code>::first-letter</code> is always contained within <code>::first-line</code> if it exists, <code>::first-letter</code> can inherit from <code>::first-line</code>.</p>
+
+            <h4>::first line</h4>
+            <p><code>::first-line</code> matches the first letter within an element.</p>
             <p class="first-line-target">The first line of this paragraph is always going to be bold, no matter how long it is. If you resize the viewport, you will still be able to see the first line of this paragraph emboldened. That's how it works.</p>
+            <p>Only a limited subset of CSS properties are usable to style <code>::first-line</code>.</p>
+
         </article>
 
         <article>
-            <h3><em>generated content</em></h3>
+
+            <h3>Highlight pseudo-elements</h3>
+            <p>Only a <a href="https://www.w3.org/TR/css-pseudo-4/#highlight-styling">very few properties may be set</a> on these. They mustn't affect layout, and must be performant.</p>
+
+            <h4>::selection</h4>
+            <p><code>:selection</code> refers to content selected to be the target or object of a future user interaction.</p>
             <ul>
-                <li>source content</li>
-                <li class="put-stuff-before-me">source content</li>
-                <li class="put-stuff-after-me">source content</li>
+                <li>Select me to see default browser selection styling.</li>
+                <li><span class="root-of-selection-search">Select me to see styling via <code>::selection</code>.</span></li>
             </ul>
+
+            <h4>::target-text</h4>
+            <p><code>::target-text</code>represents text directly targeted by the document URL's fragment. Not totally clear what this means. See the
+                <a href="https://www.w3.org/TR/css-pseudo-4/#selectordef-target-text">W3C reference</a>. There is no browser support as of Jan 2021, but Chrome has <a href="https://groups.google.com/a/chromium.org/g/blink-dev/c/yN2lrq67a1c/m/_Giqh2g_AwAJ?pli=1">expressed an intent to ship.</a> When it's out, the possibilities will become clear.</p>
+            <p>One thing that is clear in the spec is that because of privacy concerns the page must not be able to read the styling of these pseudo-elements (similar to <code>:visited</code>.)</p>
+
+            <h4>::spelling-error and ::grammar-error</h4>
+            <p>What you'd expect. No browser support as of Jan 2021.</p>
         </article>
+
+        <article>
+
+            <h3>Tree-abiding pseudo-elements</h3>
+
+            <h4>::before</h4>
+            <p>Generates an element immediately before the originating element, containing the value specified in the <code>content</code> property (not generated if the value is <code>none</code>).</p>
+            <div class="root-of-before-search">Generated indicators draw attention to this line.</div>
+
+            <h4>::after</h4>
+            <p>Generates an element immediately after the originating element, containing the value specified in the <code>content</code> property (not generated if the value is <code>none</code>).</p>
+
+            <div class="root-of-after-search">Generated ellipsis indicates I'm cut off in mid sente</div>
+
+            <h4>::marker</h4>
+            <p><code>::marker</code> represents the marker box of a list item. Limited CSS properties available. <a href="https://caniuse.com/?search=%3A%3Amarker">Some browser support</a>, so consider an enhancement.</p>
+            <ul class="root-of-marker-search">
+                <li>thing 1</li>
+                <li>thing 2</li>
+            </ul>
+
+            <h4>::placeholder</h4>
+            <p><code>::placeholder</code> represents the <i>text</i> displayed as the placeholder. Compare this to the <code>:placeholder-shown</code> pseudo-class which selects <i>elements</i> that are displaying placeholder text. Limited to the same CSS properties as <code>::first-line</code>.</p>
+            <input type="text" placeholder="holding the place" class="root-of-placeholder-search">
+            
+            <h4>::file-selector-button</h4>
+            <p class="root-of-file-selector-button-search"><code>::file-selector-button</code> styles the file upload button of a <code>file</code> type input: <input type="file"></p>
+            <p>This works in Firefox, but Webkit / Blink currently implement the non-standard <code>::-webkit-file-upload-button</code>.</p>
+        </article>
+
+<!--        TODO: add missing pseudo-elements from https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-elements -->
+<!--        TODO: check web components for pseud-elements / pseudo-classes -->
+
     </section>
     <footer class="meta">Made by <a href="http://twitter.com/davidcmoulton">@davidcmoulton</a></footer>
 </body>

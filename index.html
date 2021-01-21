@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Demonstration of CSS selectors, and some pseudo-elements</title>
+    <title>Explanation / demonstration of CSS selectors, and some pseudo-elements</title>
     <meta name="description" content="Markup supporting selectors.css">
     <link rel="stylesheet" href="meta.css">
     <link rel="stylesheet" href="selectors.css">
 </head>
 <body>
     <header role="banner">
-        <h1>Demonstration of CSS selectors, and some pseudo-elements</h1>
+        <h1>Explanation / demonstration of CSS selectors, and some pseudo-elements</h1>
     </header>
 <!--TODO: mention types of selectors, see level 4 spec-->
     <section>
@@ -202,7 +202,7 @@
 
         <article>
             <h3>:has</h3>
-            <p><code>:has</code> takes a selector list as an argument and matches the selector it's bound to when any selector in the list matches. This could easily be used to match an element based on its descendants. Before level 4 this was not possible in CSS. Unfortunately as of 2020 there is no browser support yet, but you can
+            <p><code>:has</code> takes a selector list as an argument and matches the selector it's bound to when any selector in the list matches. This could easily be used to match an element based on its descendants. Before level 4 this was not possible in CSS. Unfortunately as of Jan 2021 there is no browser support yet, but you can
                 <a href="https://caniuse.com/?search=%3Ahas">keep an eye on it</a>.</p>
         </article>
 
@@ -409,6 +409,19 @@
             <p>As <code>:nth-last-child</code>, but only elements of the element type to match are included in the evaluation of the child count. It is more specific than <code>:nth-last-child</code>.</p>
         </article>
 
+        <article>
+
+            <h3>Shadow DOM</h3>
+
+            <h4>:host, :host(selector) and :host-context(selector)</h4>
+            <p>These are used to target the Shadow host <b>from within the Shadow DOM CSS</b>. Shouldn't really be possible as the Shadow host is outside of the Shadow root, but there are
+                <a href="https://drafts.csswg.org/css-scoping/#host-element-in-tree">good reasons for it</a>. Basically, Shadow hosts are weird.</p>
+            <p><code>:host</code> matches the Shadow tree's Shadow host.</p>
+            <p><code>::host(selector)</code> matches the Shadow tree's Shadow host if it also matches the selector.</p>
+            <p><code>:host-context(selector)</code> matches a Shadow host if it, or one of its Shadow-including ancestors matches the selector (meaning that this selector pierces Shadow boundaries in its upward search). Browser support patchy (Jan 2021), so
+                <a href="https://caniuse.com/mdn-css_selectors_host-context">check before you use.</a>
+            </p>
+        </article>
     </section>
 
     <section>
@@ -435,7 +448,7 @@
             </ul>
             <h4>:focus and :focus-within</h4>
             <p><code>:focus</code> matches the currently focused element.</p>
-            <p><code>:focus-within</code> matches an element when that element is an ancestor of the currently focused element. Note that <code>focus-within</code> is a rare example in CSS of being able to style an ancestor depending on the state of a descendant. [Well, okay, in theory there's <code>has()</code>, but no browser supports that as of 2020.]</p>
+            <p><code>:focus-within</code> matches an element when that element is an ancestor of the currently focused element. Note that <code>focus-within</code> is a rare example in CSS of being able to style an ancestor depending on the state of a descendant. [Well, okay, in theory there's <code>:has()</code>, but no browser supports that as of Jan 2021.]</p>
             <form method="GET" action="#" class="root-of-ui-pseudo-classes-search root-of-ui-pseudo-classes-search--form1 focus-within">
                 <div><label for="form_focus"><code>:focus</code></label><input type="text" id="form_focus" name="form_focus"></div>
                 <button type="submit">A submit button</button>
@@ -529,7 +542,7 @@
 
         </article>
         <article>
-            <h3>Time-based pseudo-classes :past, :current and :future</h3>
+            <h3>Time-based pseudo-classes :past, :current and :future (WebVTT)</h3>
             <p>Relate to currently displayed, or active position, in some timeline. Might be used for highlighting the currently spoken phrase from VTT, for example. No browser support information available.</p>
 <!--            TODO: Demo-->
         </article>
@@ -629,6 +642,33 @@
             <h4>::file-selector-button</h4>
             <p class="root-of-file-selector-button-search"><code>::file-selector-button</code> styles the file upload button of a <code>file</code> type input: <input type="file"></p>
             <p>This works in Firefox, but Webkit / Blink currently implement the non-standard <code>::-webkit-file-upload-button</code>.</p>
+        </article>
+
+        <article>
+
+            <h3>Caption-based pseudo-elements (WebVTT)</h3>
+
+            <h4>::cue(selector)</h4>
+            <p>Used without the optional selector, <code>::cue</code> styles a WebVTT track's cues as if they were a single unit, except background styling, which is applied individually Good browser support.</p>
+            <p><code>::cue(selector)</code> <a href="https://caniuse.com/?search=%3A%3Acue">lacks Firefox support</a>, so be careful.</p>
+
+            <h4>::cue-region</h4>
+            <p>Not entirely sure what the practical difference is between this and <code>::cue </code>. No browser support info, so prolly not worth worrying about atm (Jan 2021).</p>
+        </article>
+
+        <article>
+
+            <h3>Shadow DOM</h3>
+
+            <h4>::part(part-name(s))</h4>
+            <p>Shadow hosts may use the HTML attribute <code>part</code> to expose selected Shadow tree elements outside of the Shadow root. The <code>::part</code> pseudo-element allows them to be <b>styled by page-level CSS</b>. For example, if a Shadow element is exposed with <code>part="foo"</code>, then the page CSS may style it with <code>::part(foo)</code>.</p> Limited styling of <code>::part</code> with pseudo-classes is available, but only with those that use local element information, not those that are structural.
+            <p>Good browser support.</p>
+            <p>If you're really digging into this, this
+                <a href="https://github.com/fergald/docs/blob/master/explainers/css-shadow-parts-1.md">more detailed explainer of <code>::part</code></a> may be useful. Note that it's from Jan 2019, so parts (ha!) may be out of date (I can't find any other references to <code>::theme</code>, for example, so this may have been dropped?).</p>
+            <p>Also, remember that CSS custom properties pierce the Shadow boundary so could be used in conjunction with these.</p>
+
+            <h4>::slotted(selector)</h4>
+            <p><code>::slotted(selector)</code>, when <b>used by Shadow DOM CSS</b>, targets (only) element nodes placed into HTML template slots, which also match the specified selector.</p>
         </article>
 
 <!--        TODO: add missing pseudo-elements from https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-elements -->

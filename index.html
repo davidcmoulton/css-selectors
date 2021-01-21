@@ -456,9 +456,9 @@
             </form>
 
             <h4>:focus-visible</h4>
-            <p>This next form is identical to the one above, except that it uses <code>focus-visible</code> rather than <code>focus</code>. This allows the user agent to use heuristics to determine whether to apply the rules or not, based on whether it seems that the user needs to know where the focus is. One example is navigation mode: both tabbing through and clicking on text inputs and buttons will result in any <code>focus</code> styles being used, whereas if you specify <code>focus-visible</code> instead, the browser decides whether or not to show them when the element receives focus. This is a good thing as clicking on a button and seeing a big outline appear unnecessarily on it can be ugly.
+            <p>This next form uses <code>focus-visible</code> rather than <code>focus</code>. This allows the user agent to use heuristics to determine whether to apply the rules or not, based on whether it seems that the user needs to know where the focus is. One example is navigation mode: both tabbing through and clicking on text inputs and buttons will result in any <code>focus</code> styles being used, whereas if you specify <code>focus-visible</code> instead, the browser decides whether or not to show them when the element receives focus. This is a good thing as clicking on a button and seeing a big outline appear unnecessarily on it can be ugly.
                 <a href="https://caniuse.com/css-focus-visible">Check browser support</a>.</p>
-            <form method="GET" action="#" class="root-of-ui-pseudo-classes-search root-of-ui-pseudo-classes-search--form2 focus-within">
+            <form method="GET" action="#" class="root-of-ui-pseudo-classes-search root-of-ui-pseudo-classes-search--form2">
                 <div><label for="form_focus-visible"><code>:focus-visible</code></label><input type="text" id="form_focus-visible" name="form_focus-visible"></div>
                 <button type="submit">A submit button</button>
                 <button type="reset">A reset button</button>

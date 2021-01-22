@@ -437,6 +437,15 @@
                 <li><code>:target-within</code> matches when an element, or a descendant element, is referenced by the document URL's fragment identifier, if any. (This is a rare example in CSS of being able to style an ancestor based on a descendant. <a href="https://caniuse.com/mdn-css_selectors_target-within">No browser support yet as of 2020</a>).</li>
                 <li><code>:scope</code> only useful with JavaScript since <code>&lt;style scoped&gt;</code> currently lacks browser support. I've not seen a compelling reason to use it yet.</li>
             </ul>
+
+            <article class="root-of-target-search">
+                <h4>Example of :target</h4>
+                <div>
+                    <div><a href="#theTarget">get the target</a></div>
+                    <div id="theTarget">I am the target!</div>
+                </div>
+            </article>
+
             <p>Note that privacy concerns may cause a browser to disregard developer-supplied <code>:link</code> / <code>:visited</code> styles. In that case it should still style them differently from each other.</p>
         </article>
 
@@ -554,21 +563,21 @@
             <!--            TODO: Demo-->
         </article>
 
-        <article class="root-of-target-search">
-            <h3>:target</h3>
-            <p>matches the element with the id corresponding to the value of the fragment identifier portion of the document's URL.</p>
-            <p><a href="#myTarget">get the target</a></p>
-            <div id="myTarget">I am the target!</div>
-        </article>
-
         <article>
-            <h3>:lang</h3>
+
+            <h3>Linguistic pseudo-classes</h3>
+
+            <h4>:lang(language code)</h4>
             <p>matches elements of the specified language. In contrast with the lang attribute selector, this <code>:lang</code> pseudo element takes many document methods of language specification into account (including the lang attribute).</p>
             <p>Make Portuguese text a different color:</p>
             <ul>
                 <li lang="en-uk">Hello!</li>
                 <li lang="pt">Ol&aacute;</li>
             </ul>
+
+            <h4>:dir(language direction)</h4>
+            <p>Left-to-right languages ara matched with <code>dir(ltr)</code>, right-to-left languages are matched with <code>dir(rtl)</code>. This is superior to <code>[dir="ltr"]</code> / <code>[dir="rtl"]</code> as the pseudo-class matching includes the browser's knowledge of document semantics. Stylistic states are not used in the matching, so the CSS <code>direction</code> property is irrelevant here.</p>
+            <p><a href="https://caniuse.com/css-dir-pseudo">Only supported in Firefox</a> as at Jan 2021. Experience teaches this is difficult but not impossible to provide some fallback for (using the <code>[dir]</code> attribute selector). It can get gnarly if you're trying to cater for the possibility of nested language direction changes.</p>
         </article>
     </section>
 
